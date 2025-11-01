@@ -135,8 +135,8 @@
                 "text": "Frontend UI"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -229,16 +229,38 @@
             "data": {
               "type": "tm.Process",
               "name": "Frontend UI",
-              "description": "Customer interacts here (menu, cart, checkout).",
+              "description": "Runs on the user’s browser (React/Vue). Handles browsing, cart, and order submission. All inputs validated by backend.",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "754e65b7-c7b4-4c3d-99ec-88859b52c7ef",
+                  "title": "[T-001] Customer Account Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker could impersonate a legitimate customer to place fraudulent orders or access their order history.",
+                  "mitigation": "• Enforce strong authentication and session management (bcrypt hashes, JWT with short expiry).\n• Use HTTPS only and secure cookies.\n• Implement multi-factor authentication for staff and optionally for customers.\n• Lock accounts after repeated failed logins.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 1,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 2,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -349,7 +371,7 @@
             "data": {
               "type": "tm.Actor",
               "name": "Customer",
-              "description": "Represents the external end user initiating the order",
+              "description": "External user placing and paying for coffee orders.",
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -465,7 +487,7 @@
             "data": {
               "type": "tm.Process",
               "name": "Web App Server",
-              "description": "",
+              "description": "Node.js backend handling authentication, order logic, payments, and DB communication.",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -585,7 +607,7 @@
             "data": {
               "type": "tm.Actor",
               "name": "Payment Gateway",
-              "description": "",
+              "description": "External third-party service for secure payment processing. Communication secured via HTTPS/TLS.",
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
@@ -706,7 +728,7 @@
             "data": {
               "type": "tm.Store",
               "name": "MongoDB Database",
-              "description": "Stores customer, order, and payment data.",
+              "description": "Trusted persistent storage for users, orders, and payments.",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -1056,6 +1078,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "",
-    "threatTop": 0
+    "threatTop": 2
   }
 }
