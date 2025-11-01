@@ -72,11 +72,11 @@
           {
             "position": {
               "x": 487,
-              "y": 280.0000000000042
+              "y": 290.00000000000415
             },
             "size": {
               "width": 310,
-              "height": 200
+              "height": 190
             },
             "attrs": {
               "label": {
@@ -790,6 +790,144 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
+              "name": "Payment Response",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Payment Response"
+            ],
+            "id": "f5338106-2137-4f38-8bbb-037751edccb2",
+            "source": {
+              "x": 940,
+              "y": 160
+            },
+            "target": {
+              "x": 720,
+              "y": 160
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Tokenized Payment Request",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Tokenized Payment Request"
+            ],
+            "id": "6de8dcb6-895b-4575-8aae-0dd0f0293649",
+            "source": {
+              "x": 720,
+              "y": 130
+            },
+            "target": {
+              "x": 940,
+              "y": 130
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Order Confirmation/Status",
+              "description": "Feedback to user.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Order Confirmation/Status"
+            ],
+            "id": "d105378e-926e-44f9-9e1f-c8af66150dbd",
+            "source": {
+              "x": 560,
+              "y": 160
+            },
+            "target": {
+              "x": 330,
+              "y": 160
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
               "name": "Order Details",
               "description": "All inputs (items, prices, delivery info) validated by backend.",
               "outOfScope": false,
@@ -836,7 +974,7 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Order Confirmation/Status",
+              "name": "Save Order Record",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
@@ -849,16 +987,16 @@
               "threats": []
             },
             "labels": [
-              "Order Confirmation/Status"
+              "Save Order Record"
             ],
-            "id": "d105378e-926e-44f9-9e1f-c8af66150dbd",
+            "id": "0c7dbbf0-8f88-4ab3-8fec-443bbae74338",
             "source": {
-              "x": 560,
-              "y": 160
+              "cell": "9a985919-67ae-4867-853d-63ac7f326d1b",
+              "port": "2c719659-6686-4fee-8dd8-a5f415afd186"
             },
             "target": {
-              "x": 330,
-              "y": 160
+              "cell": "fb5878b3-c537-4433-a419-b98a05712833",
+              "port": "7204eac7-8a4f-42cd-82ac-e96be71b15d6"
             },
             "vertices": []
           },
