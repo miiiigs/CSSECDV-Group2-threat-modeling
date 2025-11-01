@@ -251,10 +251,23 @@
                   "new": false,
                   "number": 1,
                   "score": ""
+                },
+                {
+                  "id": "20d6ffcd-db3c-4807-94d3-341d4a91a216",
+                  "title": "[T-003] Web Application Server Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker might set up a fraudulent web server to phish user credentials or intercept data.",
+                  "mitigation": "Use valid TLS certs\nEnable HSTS & certificate pinning\nVerify API domains via CORS\nEducate users about URL integrity.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
-                "spoofing": 2,
+                "spoofing": 6,
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
@@ -377,7 +390,11 @@
               "reasonOutOfScope": "",
               "hasOpenThreats": false,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [],
+              "threatFrequency": {
+                "spoofing": 2,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -394,8 +411,8 @@
                 "text": "Web App Server"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -491,12 +508,47 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "adfcc75a-1d80-49b9-82b3-8d6781b6f6fe",
+                  "title": "[T-001] Customer Account Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker could impersonate a legitimate customer to place fraudulent orders or access their order history.",
+                  "mitigation": "• Enforce strong authentication and session management (bcrypt hashes, JWT with short expiry).\n• Use HTTPS only and secure cookies.\n• Implement multi-factor authentication for staff and optionally for customers.\n• Lock accounts after repeated failed logins.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                },
+                {
+                  "id": "d0a4d60e-ed16-4f73-bf2d-4c9c606303e1",
+                  "title": "[T-003] Web Application Server Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker might set up a fraudulent web server to phish user credentials or intercept data.",
+                  "mitigation": "Use valid TLS certs\nEnable HSTS & certificate pinning\nVerify API domains via CORS\nEducate users about URL integrity.",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 3,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             },
             "zIndex": 3
           },
@@ -950,52 +1002,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Order Details",
-              "description": "All inputs (items, prices, delivery info) validated by backend.",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Order Details"
-            ],
-            "id": "8c5a04c6-a208-4e9b-bfcb-6b77601852f0",
-            "source": {
-              "x": 330,
-              "y": 130
-            },
-            "target": {
-              "x": 560,
-              "y": 130
-            },
-            "vertices": []
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Save Order Record",
               "description": "",
               "outOfScope": false,
@@ -1019,6 +1025,52 @@
             "target": {
               "cell": "fb5878b3-c537-4433-a419-b98a05712833",
               "port": "7204eac7-8a4f-42cd-82ac-e96be71b15d6"
+            },
+            "vertices": []
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Order Details",
+              "description": "All inputs (items, prices, delivery info) validated by backend.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Order Details"
+            ],
+            "id": "8c5a04c6-a208-4e9b-bfcb-6b77601852f0",
+            "source": {
+              "x": 330,
+              "y": 130
+            },
+            "target": {
+              "x": 560,
+              "y": 130
             },
             "vertices": []
           },
@@ -1078,6 +1130,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "",
-    "threatTop": 2
+    "threatTop": 8
   }
 }
