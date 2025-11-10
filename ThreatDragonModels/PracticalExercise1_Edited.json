@@ -227,7 +227,7 @@
           {
             "position": {
               "x": 587,
-              "y": 960
+              "y": 790
             },
             "size": {
               "width": 170,
@@ -880,415 +880,6 @@
             "vertices": []
           },
           {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Displays orders data",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Displays orders data"
-            ],
-            "id": "052770bd-8887-42f7-809d-bd17ab15578a",
-            "source": {
-              "x": 590,
-              "y": 500
-            },
-            "target": {
-              "x": 360,
-              "y": 760
-            },
-            "vertices": [
-              {
-                "x": 510,
-                "y": 520
-              },
-              {
-                "x": 390,
-                "y": 590
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Updates order status",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Updates order status"
-            ],
-            "id": "d79c456e-5b36-401a-a325-bc1b59f30a77",
-            "source": {
-              "x": 440,
-              "y": 760
-            },
-            "target": {
-              "x": 600,
-              "y": 530
-            },
-            "vertices": [
-              {
-                "x": 460,
-                "y": 630
-              },
-              {
-                "x": 520,
-                "y": 570
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Sends Log in request",
-              "description": "Sends the login details from the frontend UI",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Sends Log in request"
-            ],
-            "id": "8a14d079-77a2-4475-bca5-6748b9b7d9c4",
-            "source": {
-              "x": 780,
-              "y": 410
-            },
-            "target": {
-              "x": 1260,
-              "y": 400
-            },
-            "vertices": [
-              {
-                "x": 950,
-                "y": 360
-              },
-              {
-                "x": 1120,
-                "y": 360
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Returns the Order Confirmation/Status",
-              "description": "Feedback to user.",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Returns the Order Confirmation/Status"
-            ],
-            "id": "d105378e-926e-44f9-9e1f-c8af66150dbd",
-            "source": {
-              "x": 1210,
-              "y": 670
-            },
-            "target": {
-              "x": 750,
-              "y": 500
-            },
-            "vertices": [
-              {
-                "x": 980,
-                "y": 720
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Returns log in response",
-              "description": "Returns the response to the login request.\n\nIf the web app was able to verify and authenticate the user login, it directs the user to the page corresponding to their user type:\nCustomer - Order page\nBarista - View orders page\nManager - Sales reports page\nAdmin - Edit menu page\n\nElse, the response sent will be an error",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Returns log in response"
-            ],
-            "id": "ffaee20e-4836-4b4a-befb-54a904942728",
-            "source": {
-              "x": 1260,
-              "y": 430
-            },
-            "target": {
-              "x": 780,
-              "y": 440
-            },
-            "vertices": [
-              {
-                "x": 1000,
-                "y": 390
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Sends order details",
-              "description": "All inputs (items, prices, delivery info) validated by backend.",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Sends order details"
-            ],
-            "id": "8c5a04c6-a208-4e9b-bfcb-6b77601852f0",
-            "source": {
-              "x": 750,
-              "y": 470
-            },
-            "target": {
-              "x": 1210,
-              "y": 640
-            },
-            "vertices": [
-              {
-                "x": 990,
-                "y": 690
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Return list of pending orders",
-              "description": "Returns the list of orders with status pending to the frontend ui",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Return list of pending orders"
-            ],
-            "id": "5e21b628-a8df-4adb-b964-32a0aecbac5a",
-            "source": {
-              "x": 1260,
-              "y": 460
-            },
-            "target": {
-              "x": 790,
-              "y": 460
-            }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Sends updated order status",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Sends updated order status"
-            ],
-            "id": "e0782b1c-6390-4de6-8ee7-4f686e32657f",
-            "source": {
-              "x": 790,
-              "y": 480
-            },
-            "target": {
-              "x": 1260,
-              "y": 480
-            },
-            "vertices": []
-          },
-          {
             "shape": "trust-boundary-curve",
             "width": 200,
             "height": 100,
@@ -1454,108 +1045,6 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Order Interaction",
-              "description": "User input and actions (browse, edit, submit)",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Order Interaction"
-            ],
-            "id": "11923d91-0683-4e55-9869-c9c22794e9c3",
-            "source": {
-              "x": 600,
-              "y": 900
-            },
-            "target": {
-              "cell": "ce526423-352d-45af-a345-4d639a31e15e",
-              "port": "2c719659-6686-4fee-8dd8-a5f415afd186"
-            },
-            "vertices": [
-              {
-                "x": 610,
-                "y": 630
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Data Flow",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Data Flow"
-            ],
-            "id": "7f842fb6-b555-4799-af0b-e4f8b70de373",
-            "source": {
-              "x": 300,
-              "y": 170
-            },
-            "target": {
-              "x": 610,
-              "y": 390
-            },
-            "vertices": [
-              {
-                "x": 490,
-                "y": 210
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
               "name": "Display sales report",
               "description": "Display basic sales report on the web browser",
               "outOfScope": false,
@@ -1573,8 +1062,8 @@
             ],
             "id": "05882c2b-0a1e-421b-a2b6-dedc9c54a816",
             "source": {
-              "x": 580,
-              "y": 420
+              "x": 590,
+              "y": 440
             },
             "target": {
               "x": 340,
@@ -1588,6 +1077,803 @@
               {
                 "x": 430,
                 "y": 260
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Sends Log in request",
+              "description": "Sends the login details from the frontend UI",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Sends Log in request"
+            ],
+            "id": "8a14d079-77a2-4475-bca5-6748b9b7d9c4",
+            "source": {
+              "x": 800,
+              "y": 450
+            },
+            "target": {
+              "x": 1300,
+              "y": 450
+            },
+            "vertices": [
+              {
+                "x": 1150,
+                "y": 450
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Returns log in response",
+              "description": "Returns the response to the login request.\n\nIf the web app was able to verify and authenticate the user login, it directs the user to the page corresponding to their user type:\nCustomer - Order page\nBarista - View orders page\nManager - Sales reports page\nAdmin - Edit menu page\n\nElse, the response sent will be an error",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Returns log in response"
+            ],
+            "id": "ffaee20e-4836-4b4a-befb-54a904942728",
+            "source": {
+              "x": 1300,
+              "y": 480
+            },
+            "target": {
+              "x": 800,
+              "y": 480
+            },
+            "vertices": [
+              {
+                "x": 1040,
+                "y": 480
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Return list of pending orders",
+              "description": "Returns the list of orders with status pending to the frontend ui",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Return list of pending orders"
+            ],
+            "id": "5e21b628-a8df-4adb-b964-32a0aecbac5a",
+            "source": {
+              "x": 1300,
+              "y": 520
+            },
+            "target": {
+              "x": 800,
+              "y": 510
+            },
+            "vertices": [
+              {
+                "x": 1070,
+                "y": 540
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Sends updated order status",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Sends updated order status"
+            ],
+            "id": "e0782b1c-6390-4de6-8ee7-4f686e32657f",
+            "source": {
+              "x": 800,
+              "y": 540
+            },
+            "target": {
+              "x": 1300,
+              "y": 550
+            },
+            "vertices": [
+              {
+                "x": 1070,
+                "y": 570
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Sends order details",
+              "description": "All inputs (items, prices, delivery info) validated by backend.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Sends order details"
+            ],
+            "id": "8c5a04c6-a208-4e9b-bfcb-6b77601852f0",
+            "source": {
+              "x": 800,
+              "y": 570
+            },
+            "target": {
+              "x": 1300,
+              "y": 580
+            },
+            "vertices": [
+              {
+                "x": 1060,
+                "y": 620
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Returns the Order Confirmation/Status",
+              "description": "Feedback to user.",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Returns the Order Confirmation/Status"
+            ],
+            "id": "d105378e-926e-44f9-9e1f-c8af66150dbd",
+            "source": {
+              "x": 1300,
+              "y": 620
+            },
+            "target": {
+              "x": 800,
+              "y": 600
+            },
+            "vertices": [
+              {
+                "x": 1060,
+                "y": 660
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Returns sales data",
+              "description": "Returns the processed sales data from the Web App Server to the Frontend UI",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Returns sales data"
+            ],
+            "id": "bcc56d53-fb0f-43ae-a4b3-5fa3c371ea46",
+            "source": {
+              "x": 1300,
+              "y": 420
+            },
+            "target": {
+              "x": 800,
+              "y": 420
+            },
+            "vertices": [
+              {
+                "x": 1050,
+                "y": 400
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Order Interaction",
+              "description": "User input and actions (browse, edit, submit)",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Order Interaction"
+            ],
+            "id": "11923d91-0683-4e55-9869-c9c22794e9c3",
+            "source": {
+              "x": 620,
+              "y": 780
+            },
+            "target": {
+              "cell": "ce526423-352d-45af-a345-4d639a31e15e",
+              "port": "2c719659-6686-4fee-8dd8-a5f415afd186"
+            },
+            "vertices": [
+              {
+                "x": 590,
+                "y": 710
+              },
+              {
+                "x": 610,
+                "y": 610
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Displays orders data",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Displays orders data"
+            ],
+            "id": "052770bd-8887-42f7-809d-bd17ab15578a",
+            "source": {
+              "x": 590,
+              "y": 500
+            },
+            "target": {
+              "x": 270,
+              "y": 620
+            },
+            "vertices": [
+              {
+                "x": 470,
+                "y": 500
+              },
+              {
+                "x": 340,
+                "y": 520
+              },
+              {
+                "x": 280,
+                "y": 570
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Updates order status",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Updates order status"
+            ],
+            "id": "d79c456e-5b36-401a-a325-bc1b59f30a77",
+            "source": {
+              "x": 390,
+              "y": 690
+            },
+            "target": {
+              "x": 600,
+              "y": 530
+            },
+            "vertices": [
+              {
+                "x": 430,
+                "y": 670
+              },
+              {
+                "x": 450,
+                "y": 600
+              },
+              {
+                "x": 560,
+                "y": 600
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Sends new menu item data",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Sends new menu item data"
+            ],
+            "id": "579de314-0ee6-4ac4-b258-7d7d68a07869",
+            "source": {
+              "x": 800,
+              "y": 360
+            },
+            "target": {
+              "x": 1300,
+              "y": 360
+            },
+            "vertices": [
+              {
+                "x": 1050,
+                "y": 340
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Return new menu item response",
+              "description": "Returns the response if a new menu item was added successfully or if there was an error in the process",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Return new menu item response"
+            ],
+            "id": "79bcb8d6-9710-43b5-9c60-68441c17850c",
+            "source": {
+              "x": 1300,
+              "y": 320
+            },
+            "target": {
+              "x": 800,
+              "y": 320
+            },
+            "vertices": [
+              {
+                "x": 1050,
+                "y": 300
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Input new menu item",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Input new menu item"
+            ],
+            "id": "908e26cb-7c35-415d-b62d-b143804e3692",
+            "source": {
+              "x": 620,
+              "y": 180
+            },
+            "target": {
+              "x": 620,
+              "y": 390
+            },
+            "vertices": [
+              {
+                "x": 550,
+                "y": 250
+              },
+              {
+                "x": 600,
+                "y": 310
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Display Response",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Display Response"
+            ],
+            "id": "3cc61a41-ec71-4348-b656-a60922500aa7",
+            "source": {
+              "x": 700,
+              "y": 390
+            },
+            "target": {
+              "x": 730,
+              "y": 190
+            },
+            "vertices": [
+              {
+                "x": 700,
+                "y": 320
+              },
+              {
+                "x": 760,
+                "y": 250
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Add new menu item",
+              "description": "From the data sent to the Web App Server, it sends the new menu item data to the MongoDB database for creation",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Add new menu item"
+            ],
+            "id": "826a5b76-f705-4baa-9794-8379e86dec61",
+            "source": {
+              "x": 1450,
+              "y": 610
+            },
+            "target": {
+              "x": 1450,
+              "y": 900
+            },
+            "vertices": [
+              {
+                "x": 1430,
+                "y": 700
+              },
+              {
+                "x": 1430,
+                "y": 800
               }
             ]
           },
@@ -1632,20 +1918,24 @@
               "port": "2c719659-6686-4fee-8dd8-a5f415afd186"
             },
             "target": {
-              "x": 740,
-              "y": 910
+              "x": 730,
+              "y": 780
             },
             "vertices": [
               {
-                "x": 730,
-                "y": 630
+                "x": 750,
+                "y": 610
+              },
+              {
+                "x": 770,
+                "y": 710
               }
             ]
           },
           {
             "position": {
-              "x": 310,
-              "y": 760
+              "x": 210,
+              "y": 630
             },
             "size": {
               "width": 170,
@@ -1765,8 +2055,8 @@
           },
           {
             "position": {
-              "x": 130,
-              "y": 150
+              "x": 160,
+              "y": 190
             },
             "size": {
               "width": 170,
@@ -1886,8 +2176,8 @@
           },
           {
             "position": {
-              "x": 630,
-              "y": -90
+              "x": 560,
+              "y": 70
             },
             "size": {
               "width": 170,
@@ -2021,6 +2311,7 @@
             },
             "width": 200,
             "height": 100,
+            "zIndex": 15,
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
@@ -2048,7 +2339,6 @@
               "x": 1640,
               "y": 900
             },
-            "zIndex": 15,
             "vertices": [
               {
                 "x": 1660,
