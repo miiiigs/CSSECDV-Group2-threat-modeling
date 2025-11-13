@@ -1025,7 +1025,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1046,12 +1047,31 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "b5eb4dcd-0b74-4045-b21e-14d2551f80fa",
+                  "title": "[T-004] Order Data Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "An attacker could modify order details (e.g., items, quantities, prices, status) in transit or at rest.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 12,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
               "POST Order Details"
@@ -1134,57 +1154,7 @@
             },
             "width": 200,
             "height": 100,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Save Order",
-              "description": "Create new order record with payment status",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Save Order"
-            ],
-            "id": "94c0e4fd-90c7-48b8-a388-0f920afd5707",
-            "source": {
-              "x": 600,
-              "y": 330
-            },
-            "target": {
-              "x": 600,
-              "y": 210
-            },
-            "vertices": [
-              {
-                "x": 580,
-                "y": 270
-              }
-            ],
-            "zIndex": 12
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
+            "zIndex": 12,
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
@@ -1203,6 +1173,77 @@
             "labels": [
               "DB Response"
             ],
+            "id": "94c0e4fd-90c7-48b8-a388-0f920afd5707",
+            "source": {
+              "x": 600,
+              "y": 330
+            },
+            "target": {
+              "x": 600,
+              "y": 210
+            },
+            "vertices": [
+              {
+                "x": 580,
+                "y": 270
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 13,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Save Order",
+              "description": "Create new order record with payment status",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "fc9f63f2-3366-48ac-9cab-9b7e967cedf2",
+                  "title": "[T-004] Order Data Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "An attacker could modify order details (e.g., items, quantities, prices, status) in transit or at rest.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 13,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
+            },
+            "labels": [
+              "Save Order"
+            ],
             "id": "5e88affb-2b63-4934-b085-4eea10477898",
             "source": {
               "x": 690,
@@ -1217,14 +1258,13 @@
                 "x": 710,
                 "y": 270
               }
-            ],
-            "zIndex": 13
+            ]
           }
         ]
       }
     ],
     "diagramTop": 1,
     "reviewer": "",
-    "threatTop": 11
+    "threatTop": 13
   }
 }
