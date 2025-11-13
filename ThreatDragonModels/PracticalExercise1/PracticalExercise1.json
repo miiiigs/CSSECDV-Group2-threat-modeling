@@ -33,8 +33,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "21d612ea-cdf7-422f-8eb5-eaad89afc4ca",
             "zIndex": -1,
+            "id": "21d612ea-cdf7-422f-8eb5-eaad89afc4ca",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Client Side Boundary",
@@ -59,6 +59,7 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
+            "zIndex": -1,
             "id": "b7488ed1-4d0a-43ff-9472-39596cd2a1d0",
             "data": {
               "type": "tm.BoundaryBox",
@@ -66,8 +67,7 @@
               "description": "The web application server trusts the client for basic UI interactions but not for data \nintegrity or authorization decisions ",
               "isTrustBoundary": true,
               "hasOpenThreats": false
-            },
-            "zIndex": -1
+            }
           },
           {
             "position": {
@@ -85,6 +85,7 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
+            "zIndex": -1,
             "id": "518c6fc1-0a01-4fb0-9b3a-14ab7caddecd",
             "data": {
               "type": "tm.BoundaryBox",
@@ -92,8 +93,7 @@
               "description": "The MongoDB database server trusts calls from the web application server’s identity",
               "isTrustBoundary": true,
               "hasOpenThreats": false
-            },
-            "zIndex": -1
+            }
           },
           {
             "position": {
@@ -111,6 +111,7 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
+            "zIndex": -1,
             "id": "f0095ae9-ada9-453c-8b61-f991df811702",
             "data": {
               "type": "tm.BoundaryBox",
@@ -118,8 +119,7 @@
               "description": "The MongoDB database server trusts calls from the web application server’s identity",
               "isTrustBoundary": true,
               "hasOpenThreats": false
-            },
-            "zIndex": -1
+            }
           },
           {
             "position": {
@@ -246,7 +246,7 @@
                   "severity": "Medium",
                   "type": "Spoofing",
                   "description": "An attacker could impersonate a legitimate customer to place fraudulent orders or access their order history.",
-                  "mitigation": "• Enforce strong authentication and session management (bcrypt hashes, JWT with short expiry).\n• Use HTTPS only and secure cookies.\n• Implement multi-factor authentication for staff and optionally for customers.\n• Lock accounts after repeated failed logins.",
+                  "mitigation": "",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 1,
@@ -259,15 +259,28 @@
                   "severity": "Medium",
                   "type": "Spoofing",
                   "description": "An attacker might set up a fraudulent web server to phish user credentials or intercept data.",
-                  "mitigation": "Use valid TLS certs\nEnable HSTS & certificate pinning\nVerify API domains via CORS\nEducate users about URL integrity.",
+                  "mitigation": "",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 6,
                   "score": ""
+                },
+                {
+                  "id": "78b0b1f2-580d-41a7-82a0-328f6e413e45",
+                  "title": "[T-002] Staff Account Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker could impersonate staff to manipulate order statuses, access sales reports, or modify menu items and application configurations.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
-                "spoofing": 6,
+                "spoofing": 9,
                 "tampering": 0,
                 "repudiation": 0,
                 "informationDisclosure": 0,
@@ -418,6 +431,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -521,7 +535,7 @@
                   "severity": "Medium",
                   "type": "Spoofing",
                   "description": "An attacker could impersonate a legitimate customer to place fraudulent orders or access their order history.",
-                  "mitigation": "• Enforce strong authentication and session management (bcrypt hashes, JWT with short expiry).\n• Use HTTPS only and secure cookies.\n• Implement multi-factor authentication for staff and optionally for customers.\n• Lock accounts after repeated failed logins.",
+                  "mitigation": "",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 5,
@@ -534,23 +548,48 @@
                   "severity": "Medium",
                   "type": "Spoofing",
                   "description": "An attacker might set up a fraudulent web server to phish user credentials or intercept data.",
-                  "mitigation": "Use valid TLS certs\nEnable HSTS & certificate pinning\nVerify API domains via CORS\nEducate users about URL integrity.",
+                  "mitigation": "",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 7,
                   "score": ""
+                },
+                {
+                  "id": "8f43004b-9174-42e6-afcf-ca748c203e0d",
+                  "title": "[T-002] Staff Account Spoofing",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Spoofing",
+                  "description": "An attacker could impersonate staff to manipulate order statuses, access sales reports, or modify menu items and application configurations.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": ""
+                },
+                {
+                  "id": "7c52493f-ef62-41d2-a856-4d5bd2630ff1",
+                  "title": "[T-004] Order Data Tampering",
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "An attacker could modify order details (items, quantities, prices, status) in transit or at rest.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 11,
+                  "score": ""
                 }
               ],
               "threatFrequency": {
-                "spoofing": 3,
-                "tampering": 0,
+                "spoofing": 6,
+                "tampering": 1,
                 "repudiation": 0,
                 "informationDisclosure": 0,
                 "denialOfService": 0,
                 "elevationOfPrivilege": 0
               }
-            },
-            "zIndex": 3
+            }
           },
           {
             "position": {
@@ -573,6 +612,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 4,
             "ports": {
               "groups": {
                 "top": {
@@ -666,8 +706,7 @@
               "hasOpenThreats": false,
               "providesAuthentication": false,
               "threats": []
-            },
-            "zIndex": 4
+            }
           },
           {
             "position": {
@@ -693,6 +732,7 @@
             },
             "visible": true,
             "shape": "store",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -776,7 +816,6 @@
               ]
             },
             "id": "fb5878b3-c537-4433-a419-b98a05712833",
-            "zIndex": 5,
             "data": {
               "type": "tm.Store",
               "name": "MongoDB Database",
@@ -813,8 +852,8 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Order Interaction",
-              "description": "User input and actions (browse, edit, submit)",
+              "name": "Payment Request",
+              "description": "tokenized payment info",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -826,23 +865,18 @@
               "threats": []
             },
             "labels": [
-              "Order Interaction"
+              "Payment Request"
             ],
-            "id": "11923d91-0683-4e55-9869-c9c22794e9c3",
+            "id": "6de8dcb6-895b-4575-8aae-0dd0f0293649",
             "source": {
-              "x": 210,
-              "y": 330
+              "x": 720,
+              "y": 130
             },
             "target": {
-              "x": 210,
-              "y": 210
+              "x": 940,
+              "y": 130
             },
-            "vertices": [
-              {
-                "x": 190,
-                "y": 270
-              }
-            ]
+            "vertices": []
           },
           {
             "shape": "flow",
@@ -865,7 +899,7 @@
             "data": {
               "type": "tm.Flow",
               "name": "Payment Response",
-              "description": "",
+              "description": "Transaction response (success/failure)",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -910,8 +944,8 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Tokenized Payment Request",
-              "description": "",
+              "name": "Order Details",
+              "description": "User input and actions (Select items, customize, submit order details)",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -923,18 +957,23 @@
               "threats": []
             },
             "labels": [
-              "Tokenized Payment Request"
+              "Order Details"
             ],
-            "id": "6de8dcb6-895b-4575-8aae-0dd0f0293649",
+            "id": "11923d91-0683-4e55-9869-c9c22794e9c3",
             "source": {
-              "x": 720,
-              "y": 130
+              "x": 210,
+              "y": 330
             },
             "target": {
-              "x": 940,
-              "y": 130
+              "x": 210,
+              "y": 210
             },
-            "vertices": []
+            "vertices": [
+              {
+                "x": 190,
+                "y": 270
+              }
+            ]
           },
           {
             "shape": "flow",
@@ -957,7 +996,7 @@
             "data": {
               "type": "tm.Flow",
               "name": "Order Confirmation/Status",
-              "description": "Feedback to user.",
+              "description": "Order confirmation and status update",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -1002,8 +1041,8 @@
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
-              "name": "Save Order Record",
-              "description": "",
+              "name": "POST Order Detail",
+              "description": "All inputs (Select items, customize, submit order details) validated by backend.",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -1015,53 +1054,7 @@
               "threats": []
             },
             "labels": [
-              "Save Order Record"
-            ],
-            "id": "0c7dbbf0-8f88-4ab3-8fec-443bbae74338",
-            "source": {
-              "cell": "9a985919-67ae-4867-853d-63ac7f326d1b",
-              "port": "2c719659-6686-4fee-8dd8-a5f415afd186"
-            },
-            "target": {
-              "cell": "fb5878b3-c537-4433-a419-b98a05712833",
-              "port": "7204eac7-8a4f-42cd-82ac-e96be71b15d6"
-            },
-            "vertices": []
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "#333333",
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "Order Details",
-              "description": "All inputs (items, prices, delivery info) validated by backend.",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": false,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": []
-            },
-            "labels": [
-              "Order Details"
+              "POST Order Details"
             ],
             "id": "8c5a04c6-a208-4e9b-bfcb-6b77601852f0",
             "source": {
@@ -1090,11 +1083,12 @@
             },
             "width": 200,
             "height": 100,
+            "zIndex": 11,
             "connector": "smooth",
             "data": {
               "type": "tm.Flow",
               "name": "Display Confirmation",
-              "description": "",
+              "description": "Display order confirmation and updated status",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
@@ -1122,14 +1116,115 @@
                 "x": 320,
                 "y": 270
               }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "Save Order",
+              "description": "Create new order record with payment status",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "Save Order"
             ],
-            "zIndex": 11
+            "id": "94c0e4fd-90c7-48b8-a388-0f920afd5707",
+            "source": {
+              "x": 600,
+              "y": 330
+            },
+            "target": {
+              "x": 600,
+              "y": 210
+            },
+            "vertices": [
+              {
+                "x": 580,
+                "y": 270
+              }
+            ],
+            "zIndex": 12
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "#333333",
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "DB Response",
+              "description": "Acknowledgement / stored record",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": false,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": []
+            },
+            "labels": [
+              "DB Response"
+            ],
+            "id": "5e88affb-2b63-4934-b085-4eea10477898",
+            "source": {
+              "x": 690,
+              "y": 210
+            },
+            "target": {
+              "x": 690,
+              "y": 330
+            },
+            "vertices": [
+              {
+                "x": 710,
+                "y": 270
+              }
+            ],
+            "zIndex": 13
           }
         ]
       }
     ],
     "diagramTop": 1,
     "reviewer": "",
-    "threatTop": 8
+    "threatTop": 11
   }
 }
