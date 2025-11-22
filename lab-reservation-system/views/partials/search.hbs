@@ -1,0 +1,117 @@
+<h2>Hello Admins!<br>Viewing Users</h2>
+
+<label for="sortby">Sort By:</label>
+<select name="sortby" id="sortby">
+  <option>User Name</option>
+  <option>Last Name</option>
+  <option>Student ID</option>
+  <option>Date Created</option>
+</select>
+<select name="asc" id="asc">
+  <option>Ascending</option>
+  <option>Descending</option>
+</select>
+<br><br>
+<form method="GET" action="/search">
+  Looking for:<br>
+  <table>
+    <tr>
+      <td><label for="username">Username:</label></td>
+      <td><input id="username" name="username" type="text" value="{{query.username}}"></td>
+    </tr>
+    <tr>
+      <td><label for="fullname">Name:</label></td>
+      <td><input id="fullname" name="fullname" type="text" value="{{query.fullname}}"></td>
+    </tr>
+    <tr>
+      <td><label for="studentid">Student ID:</label></td>
+      <td><input id="studentid" name="studentid" type="text" value="{{query.studentid}}"></td>
+    </tr>
+  </table>
+
+  <br>
+  <button type="submit">Search</button>
+  <br>
+</form>
+
+
+
+<hr>
+
+<div class="box" id="view_box">
+{{#each users}}
+  <div class="view_slide">
+    <div class="view_slide_top">
+      <a class="profile-pic" src="${user.profilePicBase64}">
+        <div id="${user.id}" class="pfp_image">
+          <p></p>
+        </div>
+      </a>
+      <div class="reservation_description">
+        <p><strong>{{username}}</strong></p><br>
+        <p>{{id}}<p><br>
+        <p>{{lastName}}, {{firstName}}<p><br>
+      </div>
+    </div>
+  </div>
+{{/each}}
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = ['username', 'fullname', 'studentid'];
+
+  inputs.forEach(id => {
+    document.getElementById(id).addEventListener("input", runSearch);
+  });
+
+  async function runSearch() {
+    const params = new URLSearchParams({
+      username: document.getElementById("username").value,
+      fullname: document.getElementById("fullname").value,
+      studentid: document.getElementById("studentid").value,
+    });
+
+    const res = await fetch(`/api/search-users?${params.toString()}`);
+    const users = await res.json();
+
+    const viewBox = document.getElementById("view_box");
+    viewBox.innerHTML = "";
+
+    users.forEach(user => {
+      const div = document.createElement("div");
+      div.className = "user_card";
+
+      const imgSrc = user.profilePicBase64
+        ? `data:${user.profilePicContentType};base64,${user.profilePicBase64}`
+        : "/data/defaultpfp.png";
+
+      div.innerHTML = `
+        
+        <div class="view_slide">
+          <div class="view_slide_top">
+            <a class="profile-pic" src="${user.profilePicBase64}">
+              <div id="${user.id}" class="pfp_image">
+                <p></p>
+              </div>
+            </a>
+            <div class="reservation_description">
+              <p><strong>${user.username}</strong></p><br>
+              <p>${user.id}<p><br>
+              <p>${user.lastName},${user.firstName}<p><br>
+            </div>
+          </div>
+        </div>
+
+
+      `;
+
+      viewBox.appendChild(div);
+    });
+  }
+});
+
+
+
+</script>

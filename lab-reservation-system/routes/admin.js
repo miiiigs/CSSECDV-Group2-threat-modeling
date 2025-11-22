@@ -1,0 +1,72 @@
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+const Error_Log = require("../models/Error_Log");
+const userController = require('../controllers/delUserController');
+
+// Import isAuthenticated middleware
+const { isAuthenticated } = require('../middleware/auth');
+
+// 🔎 Search
+router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
+  const { username, fullname, studentid } = req.query;
+
+  const query = {};
+
+  if (username) query.username = { $regex: username, $options: 'i' };
+  if (fullname) {
+    query.$or = [
+      { firstName: { $regex: fullname, $options: 'i' } },
+      { lastName: { $regex: fullname, $options: 'i' } }
+    ];
+  }
+  if (studentid) query.id = studentid;
+
+  const users = await User.find(query).lean();
+
+  res.render('partials/search', {
+    users,
+    query: req.query // so input fields stay filled
+  });
+});
+
+// ❌ Admin: Delete User
+router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
+  try {
+    const {id, email, username, isLabtech} = req.query;
+    const query = {};
+    
+    const inp = req.query.searchInput;
+    const opt = req.query.searchField;
+    
+    if(opt == 'id') query.id = req.query.searchInput;
+    else if(opt == 'email') query.email = req.query.searchInput;
+    else if(opt == 'username') query.username = req.query.searchInput;
+
+    query.isLabtech = false;
+    const user = await User.find(query).lean();
+
+    res.render("partials/admin_delete_user", {
+      usersToDelete: user,
+      query: req.query,
+      delUser: true
+    });
+
+  } catch (err) {
+    // Create error log
+      let error = new Error_Log({
+        type: "Error",
+        where: "Route Admin : Get /delete-user",
+        description: "Error deleting user",
+        error: err
+      });
+      await error.save();
+
+    console.error("Delete user error:", err);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post('/delete-post', userController.deleteUser);
+
+module.exports = router; 

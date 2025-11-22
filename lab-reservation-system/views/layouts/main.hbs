@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lab Reservation System</title>
+  <link rel="stylesheet" href="/css/main_style.css" />
+  <link rel="stylesheet" href="/css/index copy.css" />
+  <link rel="stylesheet" href="/css/box.css" />
+  {{#if viewP}}<link rel="stylesheet" href="/css/profile.css" />{{/if}}
+  {{#if create}}<script src="/js/script.js" defer></script>{{/if}}
+  {{#if viewR}}<script src="/js/script.js" defer></script>{{/if}}
+  {{#if search}}<script src="/js/script.js" defer></script>{{/if}}
+  {{#if delUser}}<script src="/js/script.js" defer></script>{{/if}}
+
+</head>
+
+<body>
+  <div class="title-color">
+  <a href="/index">
+    <img src="/data/Logo.png" alt="LabRes Logo">
+  </a>
+  <h2 id="title">LS Lab Reservations</h2>
+  {{#if user}}
+    <h2 id ="title">Welcome, {{user.firstName}}</h2>
+  {{/if}}
+</div>
+
+
+  <div class="links">
+    <div class="left-tab">
+      <nav>
+  <div {{#if index}}id="currentlyhere"{{/if}}>
+    <a href="/index">Home</a>
+  </div>
+
+  {{#if user}}
+    <div {{#if create}}id="currentlyhere"{{/if}}>
+      <a href="/create">Create Reservation</a>
+    </div>
+    {{#if user.isLabtech}}
+      <div {{#if viewR}}id="currentlyhere"{{/if}}>
+        <a href="/view_reservation">View Reservations</a>
+
+      </div>
+      <div {{#if delUser}}id="currentlyhere"{{/if}}>
+        <a href="/delete-user">Delete User</a>
+      </div>
+    {{/if}}
+
+    <div {{#if viewP}}id="currentlyhere"{{/if}}>
+      <a href="/profile">View Profile</a>
+    </div>
+
+    <div {{#if search}}id="currentlyhere"{{/if}}>
+      <a href="/search">Search Profiles</a>
+    </div>
+
+    <div>
+      <a href="/logout" id="auth-link">Logout</a>
+    </div>
+  {{else}}
+    <div>
+      <a href="/login" id="auth-link">Login</a>
+    </div>
+    <div>
+      <a href="/register">Register</a>
+    </div>
+  {{/if}}
+</nav>
+
+    </div>
+
+    <div class="table">
+      {{{body}}}
+    </div>
+  </div>
+
+</body>
+
+</html>

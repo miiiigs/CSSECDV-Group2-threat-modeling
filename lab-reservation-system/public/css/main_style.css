@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@500&display=swap');
+
+:root {
+  --Mainclr: #364b46;
+  --Subclr: #7EAE96;
+  --BGclr: #EEEEEE;
+  font-size: 16px;
+  font-family: "Noto Sans Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+@font-face {
+  font-family: TitleFont;
+  src: url(data/Wilker.otf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Tahoma;
+}
+
+a{
+  text-decoration: none;
+}
+
+body{
+    background-color: white;
+}
+
+
+.title-color {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: var(--Mainclr);
+  border-bottom: 3px solid darkslategray;
+  margin: auto;
+}
+
+.title-color img{
+  margin-left: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+#title {
+  margin-left: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 32px;
+  font-weight: bold;
+  color:#FFFFFF;
+  font-family: Cambria;
+}
+
+body {
+  background-color: var(--BGclr);
+}

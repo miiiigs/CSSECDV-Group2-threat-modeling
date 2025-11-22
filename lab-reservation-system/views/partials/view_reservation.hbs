@@ -1,0 +1,93 @@
+<h2>Hello Admins!<br />Viewing Reservations</h2>
+
+<label for="sortby">Sort By:</label>
+<select name="sortby" id="sortby">
+  <option>User Name</option>
+  <option>Laboratory</option>
+  <option>Date Made</option>
+  <option>Date Reserved</option>
+  <option>Approval Type</option>
+</select>
+<select name="asc" id="asc">
+  <option>Ascending</option>
+  <option>Descending</option>
+</select>
+<br /><br />
+
+Looking for:<br />
+<form id="search-form">
+  <label for="username">Username: </label>
+  <input name="username" id="search-username" type="text" value="{{searchParams.username}}" /><br />
+  <label>Lab: </label>
+  <select name="lab" id="search-lab">
+    <option value="">All Labs</option>
+    <option value="1" {{#if (eq searchParams.lab "1")}}selected{{/if}}>1</option>
+    <option value="2" {{#if (eq searchParams.lab "2")}}selected{{/if}}>2</option>
+    <option value="3" {{#if (eq searchParams.lab "3")}}selected{{/if}}>3</option>
+    <option value="4" {{#if (eq searchParams.lab "4")}}selected{{/if}}>4</option>
+    <option value="5" {{#if (eq searchParams.lab "5")}}selected{{/if}}>5</option>
+  </select>
+  <label>PC No.: </label>
+  <input name="pcno" id="search-pcno" type="text" value="{{searchParams.pcno}}" /><br /><br />
+  <button type="submit" id="search-btn">Search Reservations</button>
+  <button type="button" id="clear-search-btn">Clear Search</button>
+</form>
+
+<hr />
+
+<div class="box" id="view_box">
+  {{#if reservations.length}}
+    {{#each reservations}}
+      <div class="view_slide">
+        <div class="view_slide_top">
+
+          <div class="reservation_description">
+            {{#if reservedBy}}
+              {{reservedBy}}
+              made a reservation<br />
+            {{else}}
+              Anonymous made a reservation<br />
+            {{/if}}
+            on
+            {{createdAt}}
+            for Laboratory #{{labNumber}}<br />
+            Reserving computer{{#if seatNumbers.length}}s{{/if}}:
+            {{seatNumbers}}<br />
+            For
+            {{date}}
+            from
+            {{startTime}}
+            to
+            {{endTime}}<br />
+          </div>
+        </div>
+
+        <div class="view_slide_bottom">
+          <div class="box">
+            <p>Lab #{{labNumber}} - {{date}} - {{startTime}} to {{endTime}}</p>
+            {{#each seatNumbers}}
+              <div class="computer">
+                <div class="number">{{this}}</div>
+                <div class="name"></div>
+              </div>
+            {{/each}}
+          </div>
+          <div class="delete-section">
+            <button class="delete-reservation-btn" 
+                    data-reservation-id="{{_id}}"
+                    data-lab="{{labNumber}}"
+                    data-seat="{{seatNumbers}}"
+                    data-date="{{date}}"
+                    data-start="{{startTime}}"
+                    data-end="{{endTime}}"
+                    title="Delete this reservation">
+              <img src="/data/cross.png" alt="Delete" width="20" height="20">
+            </button>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <p>No reservations found.</p>
+  {{/if}}
+</div>

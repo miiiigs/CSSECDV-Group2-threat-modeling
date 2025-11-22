@@ -1,0 +1,342 @@
+.box {
+  width: 90%; /* responsive */
+  max-width: 1000px; /* keeps it from being too wide */
+  margin: 30px auto; /* centers horizontally */
+  background-color: rgb(253, 253, 253);
+  box-shadow: 0 0 10px;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box > .computer {
+  width: 90px;
+  height: 90px;
+  background-image: url("../data/computer-sprite.png");
+  background-size: 100% 100%;
+  display: block;
+}
+
+/* Reserved computers – red background */
+.box .computer.reserved {
+  background-image: url("../data/red.png");
+  cursor: not-allowed;
+  pointer-events: none; /* Prevent clicking */
+}
+
+
+.box .computer.in-use {
+  background-image: url("../data/green.png");
+}
+
+.box > .computer > .number {
+  padding-top: 18%;
+  margin-left: auto;
+  width: 80%;
+  height: 52%;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 4vh;
+  text-shadow: 1px 1px gray;
+  font-family: "Courier New";
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.box > .computer > .name {
+  width: 80%;
+  text-align: center;
+  margin-left: auto;
+  font-size: 2vh;
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
+.box img {
+  width: 60px;
+  height: 60px;
+}
+
+.box-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+}
+
+.box-buttons button {
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: seagreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.box-buttons #Clear {
+  background-color: #6a8977;
+}
+
+.box-buttons #Delete {
+  background-color: red;
+}
+
+.box-buttons #Delete:hover {
+  background-color: darkred;
+}
+
+.box-buttons button:hover {
+  background-color: mediumseagreen;
+}
+
+.box-buttons #Clear:hover {
+  background-color: mediumseagreen;
+}
+
+.selectable:hover {
+  background-color: #90ee90;
+}
+
+.selected {
+  background-color: dodgerblue !important;
+  color: white;
+}
+
+#view_box {
+  width: 95%; /* responsive */
+  max-width: 5000px;
+  max-height: 810px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.view_slide {
+  width: 31%;
+  background-color: var(--Subclr);
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.view_slide_top {
+  margin: 10px;
+  display: flex;
+}
+
+.reservation_description {
+  margin: 5px;
+  width: 75%;
+}
+
+.reservation_options {
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation_options img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  align-self: flex-start;
+}
+
+.reservation_options img:hover {
+  background-color: var(--Mainclr);
+}
+
+.view_slide_bottom {
+  margin: 10px;
+  margin-top: 0px;
+}
+
+.view_slide_bottom > .box {
+  margin: 0px;
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.view_slide_bottom > span {
+  font-size: 1.5em;
+  text-align: end;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.view_slide_bottom > .approved {
+  color: GREEN;
+}
+
+.view_slide_bottom > .pending {
+  color: LIGHTGREY;
+}
+
+.view_slide_bottom > .denied {
+  color: RED;
+}
+
+.pfp {
+  margin: auto;
+  background-size: 100% 100%;
+  width: 90px;
+  border-radius: 10px;
+  text-align: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.pfp .pfp_image {
+  width: 90px;
+  height: 90px;
+}
+
+.pfp p {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px rgb(0, 0, 0);
+  margin-top: auto;
+  align-self: flex-end;
+  padding-top: 65px;
+}
+
+.pfp p:hover {
+  color: lightblue;
+}
+
+.box > p {
+  width: 100%;
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#PiiPoo {
+  background-image: url("../data/PiiPoo.png");
+  background-size: 100% 100%;
+  border-radius: 5%;
+}
+
+#abc456 {
+  background-image: url("../data/abc456.png");
+  background-size: 100% 100%;
+  border-radius: 5%;
+}
+
+#xyz123 {
+  background-image: url("../data/xyz123.png");
+  background-size: 100% 100%;
+  border-radius: 5%;
+}
+
+#BirdUp {
+  background-image: url("../data/BirdUp.png");
+  background-size: 100% 100%;
+  border-radius: 5%;
+}
+
+#Someone {
+  background-image: url("../data/Someone.png");
+  background-size: 100% 100%;
+  border-radius: 5%;
+}
+
+/* Delete reservation button styling */
+.delete-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.delete-reservation-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.delete-reservation-btn:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.delete-reservation-btn img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.delete-reservation-btn:hover img {
+  opacity: 1;
+}
+
+/* Search form styling */
+#search-form {
+  margin: 10px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+#search-form label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#search-form input,
+#search-form select {
+  padding: 5px 10px;
+  margin: 5px 10px 5px 0;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#search-form input:focus,
+#search-form select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+#search-btn,
+#clear-search-btn {
+  padding: 8px 16px;
+  margin: 5px 10px 5px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#search-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+#search-btn:hover {
+  background-color: #0056b3;
+}
+
+#clear-search-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+#clear-search-btn:hover {
+  background-color: #545b62;
+}

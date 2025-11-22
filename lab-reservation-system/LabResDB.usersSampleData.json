@@ -1,0 +1,222 @@
+[
+  {
+    "username": "user01@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000001",
+    "firstName": "User",
+    "lastName": "01",
+    "email": "user01@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user02@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000002",
+    "firstName": "User",
+    "lastName": "02",
+    "email": "user02@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user03@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000003",
+    "firstName": "User",
+    "lastName": "03",
+    "email": "user03@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user04@dls.edu.ph",
+    "password": "123",
+    "id": "10000000004",
+    "firstName": "User",
+    "lastName": "04",
+    "email": "user04@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user05@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000005",
+    "firstName": "User",
+    "lastName": "05",
+    "email": "user05@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user06@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000006",
+    "firstName": "User",
+    "lastName": "06",
+    "email": "user06@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user07@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000007",
+    "firstName": "User",
+    "lastName": "07",
+    "email": "user07@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user08@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000008",
+    "firstName": "User",
+    "lastName": "08",
+    "email": "user08@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user09@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000009",
+    "firstName": "User",
+    "lastName": "09",
+    "email": "user09@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user10@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000010",
+    "firstName": "User",
+    "lastName": "10",
+    "email": "user10@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user11@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000011",
+    "firstName": "User",
+    "lastName": "11",
+    "email": "user11@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user12@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000012",
+    "firstName": "User",
+    "lastName": "12",
+    "email": "user12@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user13@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000013",
+    "firstName": "User",
+    "lastName": "13",
+    "email": "user13@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user14@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000014",
+    "firstName": "User",
+    "lastName": "14",
+    "email": "user14@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user15@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000015",
+    "firstName": "User",
+    "lastName": "15",
+    "email": "user15@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user16@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000016",
+    "firstName": "User",
+    "lastName": "16",
+    "email": "user16@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user17@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000017",
+    "firstName": "User",
+    "lastName": "17",
+    "email": "user17@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user18@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000018",
+    "firstName": "User",
+    "lastName": "18",
+    "email": "user18@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user19@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000019",
+    "firstName": "User",
+    "lastName": "19",
+    "email": "user19@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  },
+  {
+    "username": "user20@dlsu.edu.ph",
+    "password": "123",
+    "id": "10000000020",
+    "firstName": "User",
+    "lastName": "20",
+    "email": "user20@dlsu.edu.ph",
+    "pronouns": "",
+    "phoneNumber": "",
+    "isLabtech": false
+  }
+]

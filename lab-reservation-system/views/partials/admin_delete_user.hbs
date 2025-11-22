@@ -1,0 +1,95 @@
+<body>
+  <h2>Delete Student</h2>
+
+  <!-- Search Section -->
+  <form method="GET" action="/delete-user" id="searchForm">
+    <input type="text" name="searchInput" id="searchInput" placeholder="Enter search value" required />
+
+    <select id="searchField" name="searchField">
+      <option value="id">ID</option>
+      <option value="email">Email</option>
+      <option value="username">Username</option>
+    </select>
+
+    <button type="submit" id="searchBtn">Search</button>
+  </form>
+  <br>
+  <hr>
+  <br>
+  <!-- Results Section -->
+  <form name="deleteUser" id="userList" action="/delete-post" method="POST">
+    <div id="results">
+      <h3>Search Results</h3>
+      <br>
+      <div class="box" id="view_box">
+      {{#if usersToDelete.length}}
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody id="tBodyId">
+                {{#each usersToDelete}}
+                    <tr>
+                        <td><input type="radio" name="selectedUser" value={{this.id}} required/></td>
+                        <td>{{this.id}}</td>
+                        <td>{{this.lastName}}, {{this.firstName}}</td>
+                        <td>{{this.email}}</td>
+                    </tr>
+                {{/each}}    
+            </tbody>
+        </table>
+      {{else}}
+          <p>No users found</p>
+      {{/if}}
+      </div>
+      <br>
+      <button type="submit" id="delUserBtn">Delete</button>
+    </div>
+  </form>
+</body>
+
+<script>
+  doccument.addEventListener("click", () =>{
+    const inp = document.getElementById("searchInput").value;
+    doccument.getElementById("searchField").value = "It works";
+
+    if(inp){
+      const sf = doccument.getElementById("searchField").value;
+      const params = new URLSearchParams({sf: inp});
+
+      const res = await fetch(`/api/search-users?${params.toString()}`);
+      const user = await res.json();
+      doccument.getElementById("searchField").value = user.email;
+
+      const div = doccument.createElement("div");
+      div.id(id="view_box");
+      div.style(style="width: 100%; border-collapse: collapse;");
+
+      div.innerHTML = `
+        <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+              <tr>
+                  <th></th>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+              </tr>
+              </thead>
+              <tbody id="tBodyId">
+                    <tr>
+                        <td><input type="radio" name="selectedUser" value=${user.id}} required/></td>
+                        <td>${user.id}</td>
+                        <td>${user.lastName}, ${user.firstName}</td>
+                        <td>${user.email}</td>
+                    </tr>   
+              </tbody>
+          </table>
+      `;
+    }
+  });
+</script>

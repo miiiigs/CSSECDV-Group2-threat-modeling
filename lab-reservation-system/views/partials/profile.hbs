@@ -1,0 +1,92 @@
+<div class="bio">
+  <div class="header">
+    <h2>@{{user.username}}</h2>
+
+  </div>
+
+  <img
+    class="profile-pic"
+    src="data:{{user.profilePicContentType}};base64,{{user.profilePicBase64}}"
+    alt="Profile Picture"
+  />
+
+  <h3>{{user.lastName}}, {{user.firstName}}</h3>
+  <h4>{{user.id}}</h4>
+ 
+  <button onclick="document.getElementById('editModal').style.display='block'">
+    Edit Profile
+  </button>
+
+  <!-- modal area -->
+  <div
+    id="editModal"
+    style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:white; padding:20px; border:1px solid #ccc; border-radius:10px;"
+  >
+    <form action="/update-profile" method="POST" enctype="multipart/form-data">
+      <label>Change Profile Picture:</label><br />
+      <input type="file" name="profilePicture" accept="image/*" /><br /><br />
+
+      <label>Username:</label><br />
+      <input type="text" name="username" value="{{user.username}}" /><br />
+
+      <label>Pronouns:</label><br />
+      <input type="text" name="pronouns" value="{{user.pronouns}}" /><br />
+
+      <label>Phone Number:</label><br />
+      <input type="text" name="phoneNumber" value="{{user.phoneNumber}}" /><br
+      />
+
+      <label>Short Bio:</label><br />
+      <textarea name="bio">{{user.bio}}</textarea><br /><br />
+
+      <button type="submit">Save Changes</button>
+      <button
+        type="button"
+        onclick="document.getElementById('editModal').style.display='none'"
+      >Cancel</button>
+    </form>
+  </div>
+
+  <div>
+    <p>pronouns: {{user.pronouns}}</p>
+    <p>Contact: {{user.phoneNumber}}</p>
+    <p>Bio: {{user.bio}}</p>
+  </div>
+</div>
+<div class="view-tab">
+  <div>
+    <h2 style="color: black;">Reservations</h2>
+
+  </div>
+      
+  <div>
+    {{#if reservations.length}}
+      <table>
+        <thead>
+          <tr>
+            <th>Lab</th>
+            <th>Computer</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th style="padding: 0 16px;">End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each reservations}}
+            <tr>
+              <td style="padding: 0 16px;">{{this.labNumber}}</td>
+              <td style="padding: 0 16px;">{{this.seatNumber}}</td>
+              <td style="padding: 0 16px;">{{this.date}}</td>
+              <td style="padding: 0 16px;">{{this.startTime}}</td>
+              <td style="padding: 0 28px;">{{this.endTime}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p>You have no reservations yet.</p>
+    {{/if}}
+
+  </div>
+
+</div>

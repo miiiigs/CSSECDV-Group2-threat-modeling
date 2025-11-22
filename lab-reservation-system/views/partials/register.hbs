@@ -1,0 +1,42 @@
+<div class="login-register">
+  <div class="form-container">
+    <h2>Register</h2>
+    <div id="formMessage"></div>
+    <form id="registrationForm" action="/register" method="post">
+      <label class="dropme" for="email">DLSU Email</label>
+      <input class="dropme-input" type="email" id="email" name="email" required />
+
+      <label class="dropme" for="password">Password</label>
+      <input class="dropme-input" type="password" id="password" name="password" required />
+
+      <label class="dropme" for="confirmPassword">Confirm Password</label>
+      <input class="dropme-input" type="password" id="confirmPassword" name="confirmPassword" required />
+
+      <label for="firstName">First Name</label>
+      <input class="dropme-input" type="text" id="firstName" name="firstName" required />
+
+      <label for="lastName">Last Name</label>
+      <input class="dropme-input" type="text" id="lastName" name="lastName" required />
+
+      <label for="id">ID Number</label>
+      <input class="dropme-input" type="text" id="id" name="id" required />
+
+
+      <!--Comment out selection of authority type -->
+
+      <!--<label class="dropme" for="type">Account Type</label>
+      <select id="type" name="type" required>
+        <option value="">Select account type</option>
+        <option value="student">Student</option>
+        <option value="technician">Lab Technician</option>
+      </select> -->
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </div>
+</div>
+
+<!-- jQuery & Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src=".../js/regQueries.js"></script>
