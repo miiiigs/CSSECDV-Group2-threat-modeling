@@ -118,6 +118,7 @@ if (loginForm) {
   });
 }
 
+// ----------------- Search User Handler -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = ['username', 'fullname', 'studentid'];
 
@@ -169,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
+// ----------------- Profile Update Handler -----------------
 document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.getElementById("edit-btn");
   const saveBtn = document.getElementById("save-btn");

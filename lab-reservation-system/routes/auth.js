@@ -12,10 +12,19 @@ router.post("/api/login", async (req, res) => {
     const user = await User.findOne({email}); // 🛡️ replace with hashed password
     if (user && await user.comparePassword(password)) {
       req.session.user = {
+
+        /*
+          Maybe for security purposes remove the username and email? only require the user id?
+          Then if we need the username, email, and such, do a query to get the required details?
+          kasi this adds user details to the session. IDK
+        */
+
         _id: user._id,
         username: user.username,
         email: user.email,
-        isLabtech: user.isLabtech,
+        // Delete this later
+        // isLabtech: user.isLabtech,
+        role: user.role
       };
       res.status(200).json({ message: "Login successful" });
     } else {

@@ -73,19 +73,24 @@ app.set("views", "./views");
 app.set("view options", { layout: "main" });
 
 // Authenticator
-
 function isAuthenticated(role) {
-  if(role == 'LabTech'){
-    var val = true;
-    if(req.session && req.session.user.isLabtech == val){
+  if(role == 'Admin'){
+    var val = 'LT';
+    if(req.session && req.session.user.role == val){
     next()
     } else {
       res.redirect('/logout');
     }
-  } 
-  else if (role == 'Student'){
+  } else if (role == 'LabTech'){
     var val = false;
-    if(req.session && req.session.user.isLabtech == val){
+    if(req.session && req.session.user.role == val){
+      next()
+    } else {
+      res.redirect('/logout');
+    }
+  } else if (role == 'Student'){
+    var val = 'US';
+    if(req.session && req.session.user.role == val){
       next()
     } else {
       res.redirect('/logout');

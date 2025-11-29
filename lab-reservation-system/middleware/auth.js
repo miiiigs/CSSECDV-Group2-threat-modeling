@@ -5,7 +5,14 @@ function isAuthenticated(role) {
       return res.redirect('/login');
     }
 
-    if (role === 'LabTech') {
+    if (role === 'Admin') {
+      if (req.session.user.isLabtech) {
+        return next();
+      } else {
+        return res.redirect('/logout');
+      }
+    }
+    else if (role === 'LabTech') {
       if (req.session.user.isLabtech) {
         return next();
       } else {

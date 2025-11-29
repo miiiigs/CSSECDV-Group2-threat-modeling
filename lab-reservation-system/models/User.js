@@ -54,10 +54,18 @@ const UserSchema = new mongoose.Schema({
     default: ""
   },
  
+  /*
+  Commented out for now, if its working then delete later
   isLabtech: {        
     type: Boolean, 
     default: false,   
     required: true,
+  }, */
+
+  userType: {
+    type: String,
+    default: "ST",
+    required: true
   },
 
   profilePicture: {

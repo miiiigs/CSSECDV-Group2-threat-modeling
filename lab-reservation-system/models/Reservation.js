@@ -9,7 +9,8 @@ const reservationSchema = new mongoose.Schema({
   reservedBy: {
     type: String,
     default: 'Anonymous'
-  }
+  },
+  id: Number
 }, {
   timestamps: true  
 });
