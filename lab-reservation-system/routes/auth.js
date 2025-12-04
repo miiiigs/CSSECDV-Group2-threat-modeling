@@ -59,49 +59,54 @@ router.post("/register", async (req, res) => {
     );
     const existingUser = await User.findOne({ id: req.body.id });
     if (existingUser) {
-         // Create error log
-        let error = new Error_Log({
-          type: "Warn",
-          where: "Auth : Post /register",
-          description: "User attempted to register with existing User ID",
-        });
-        await error.save();
-
+      let error = new Error_Log({
+        type: "Warn",
+        where: "Auth : Post /register",
+        description: "User attempted to register with existing User ID",
+      });
+      await error.save();
       return res.status(400).send("User ID already exists.");
-
     }
 
-        let role = req.body.role;
-        if (role !== 'student' && role !== 'labtech') {
-          role = 'student'; // fallback to student if tampered
-        }
-        const user = new User({
-          username: req.body.email,
-          email: req.body.email,
-          password: req.body.password,
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          id: req.body.id,
-          role,
-          profilePicture: {
-            data: defaultImage,
-            contentType: "image/png",
-          },
-        });
+    // Password policy enforcement
+    const password = req.body.password;
+    const minLength = 8;
+    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    if (!password || password.length < minLength) {
+      return res.status(400).send("Password must be at least 8 characters long.");
+    }
+    if (!complexityRegex.test(password)) {
+      return res.status(400).send("Password must contain uppercase, lowercase, number, and special character.");
+    }
+
+    let role = req.body.role;
+    if (role !== 'student' && role !== 'labtech') {
+      role = 'student';
+    }
+    const user = new User({
+      username: req.body.email,
+      email: req.body.email,
+      password: password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      id: req.body.id,
+      role,
+      profilePicture: {
+        data: defaultImage,
+        contentType: "image/png",
+      },
+    });
 
     await user.save();
     res.redirect("/login");
   } catch (err) {
-
-    // Create error log
-      let error = new Error_Log({
-        type: "Error",
-        where: "Auth : Post /register",
-        description: "Error user registration",
-        error: err
-      });
-      await error.save();
-
+    let error = new Error_Log({
+      type: "Error",
+      where: "Auth : Post /register",
+      description: "Error user registration",
+      error: err
+    });
+    await error.save();
     console.error("Registration error:", err);
     res.status(500).send("Error creating user");
   }
