@@ -54,10 +54,35 @@ const UserSchema = new mongoose.Schema({
     default: ""
   },
  
-  isLabtech: {        
-    type: Boolean, 
-    default: false,   
+
+  role: {
+    type: String,
+    enum: ['admin', 'labtech', 'student'],
     required: true,
+    default: 'student'
+  },
+
+  accountLocked: {
+    type: Boolean,
+    default: false
+  },
+
+  failedLoginAttempts: {
+    type: Number,
+    default: 0
+  },
+
+  passwordHistory: {
+    type: [String],
+    default: []
+  },
+
+  lastLogin: {
+    type: Date
+  },
+
+  lastFailedLogin: {
+    type: Date
   },
 
   profilePicture: {
