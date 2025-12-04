@@ -1,9 +1,15 @@
+
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
 const Error_Log = require("../models/Error_Log");
 const fs = require("fs");
 const path = require("path");
+
+// Registration page (GET)
+router.get("/register", (req, res) => {
+  res.render("partials/register", { showRoleSelect: true });
+});
 
 // 🔑 Login API
 router.post("/api/login", async (req, res) => {
@@ -15,7 +21,7 @@ router.post("/api/login", async (req, res) => {
         _id: user._id,
         username: user.username,
         email: user.email,
-        isLabtech: user.isLabtech,
+        role: user.role,
       };
       res.status(200).json({ message: "Login successful" });
     } else {
@@ -65,19 +71,23 @@ router.post("/register", async (req, res) => {
 
     }
 
+        let role = req.body.role;
+        if (role !== 'student' && role !== 'labtech') {
+          role = 'student'; // fallback to student if tampered
+        }
         const user = new User({
-      username: req.body.email,
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      id: req.body.id,
-      //isLabtech: req.body.type === "technician",
-      profilePicture: {
-        data: defaultImage,
-        contentType: "image/png",
-      },
-    });
+          username: req.body.email,
+          email: req.body.email,
+          password: req.body.password,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          id: req.body.id,
+          role,
+          profilePicture: {
+            data: defaultImage,
+            contentType: "image/png",
+          },
+        });
 
     await user.save();
     res.redirect("/login");

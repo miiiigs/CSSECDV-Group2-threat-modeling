@@ -8,7 +8,7 @@ const Error_Log = require("../models/Error_Log");
 router.get("/create", async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id).lean();
-    if (user.isLabtech)
+      if (user.role === 'labtech')
       res.render("partials/admin_create_reservation", { create: true });
     else res.render("partials/create_reservation", { create: true });
   } catch (err) {
@@ -252,7 +252,7 @@ router.delete('/api/reservations/:id', async (req, res) => {
     console.log("Session user:", req.session.user);
     
     // Check if user is admin/labtech
-    if (!req.session.user || !req.session.user.isLabtech) {
+      if (!req.session.user || (req.session.user.role !== 'labtech' && req.session.user.role !== 'admin')) {
       console.log("Access denied - user not admin/labtech");
       return res.status(403).json({ message: "Access denied. Admin privileges required." });
     }

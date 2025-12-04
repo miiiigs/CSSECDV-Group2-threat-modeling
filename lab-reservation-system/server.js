@@ -74,39 +74,9 @@ app.set("view options", { layout: "main" });
 
 // Authenticator
 
-function isAuthenticated(role) {
-  if(role == 'LabTech'){
-    var val = true;
-    if(req.session && req.session.user.isLabtech == val){
-    next()
-    } else {
-      res.redirect('/logout');
-    }
-  } 
-  else if (role == 'Student'){
-    var val = false;
-    if(req.session && req.session.user.isLabtech == val){
-      next()
-    } else {
-      res.redirect('/logout');
-    }
-  }
-  else {
+// Deprecated: Use middleware/auth.js for role checks
 
-      //add error here
-      // Create error log
-      let error = new Error_Log({
-        type: "Warn",
-        where: "isAuthenticated",
-        description: "User attempted to enter page they are not authenticated in",
-      });
-      error.save();
-      
-      res.redirect('/logout');
-  }
 
-  
-}
 
 // 🟢 Routes
 app.use("/", pageRoutes);

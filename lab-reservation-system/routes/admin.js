@@ -33,7 +33,7 @@ router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
 // ❌ Admin: Delete User
 router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
   try {
-    const {id, email, username, isLabtech} = req.query;
+    const {id, email, username, role} = req.query;
     const query = {};
     
     const inp = req.query.searchInput;
@@ -43,7 +43,8 @@ router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
     else if(opt == 'email') query.email = req.query.searchInput;
     else if(opt == 'username') query.username = req.query.searchInput;
 
-    query.isLabtech = false;
+    // Only show students (non-admin, non-labtech) for deletion by default
+    query.role = 'student';
     const user = await User.find(query).lean();
 
     res.render("partials/admin_delete_user", {

@@ -40,11 +40,15 @@
     <div {{#if create}}id="currentlyhere"{{/if}}>
       <a href="/create">Create Reservation</a>
     </div>
-    {{#if user.isLabtech}}
+    {{#if (eq user.role 'labtech')}}
       <div {{#if viewR}}id="currentlyhere"{{/if}}>
         <a href="/view_reservation">View Reservations</a>
-
       </div>
+      <div {{#if delUser}}id="currentlyhere"{{/if}}>
+        <a href="/delete-user">Delete User</a>
+      </div>
+    {{/if}}
+    {{#if (eq user.role 'admin')}}
       <div {{#if delUser}}id="currentlyhere"{{/if}}>
         <a href="/delete-user">Delete User</a>
       </div>
