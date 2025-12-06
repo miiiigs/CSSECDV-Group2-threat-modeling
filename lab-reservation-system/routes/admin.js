@@ -70,4 +70,10 @@ router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
 
 router.post('/delete-post', userController.deleteUser);
 
+// 🔎 Test for new admin
+router.get('/temp', isAuthenticated('Admin'), async (req, res) => {
+  res.render('partials/admin_test', {
+  });
+});
+
 module.exports = router; 
