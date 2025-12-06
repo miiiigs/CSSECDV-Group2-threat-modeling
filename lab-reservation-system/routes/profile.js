@@ -8,6 +8,9 @@ const multer = require("multer");
 // 📦 Multer (store uploaded files in memory)
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Import isAuthenticated middleware
+const { isAuthenticated, newAuthCheck } = require('../middleware/auth');
+
 // 📸 Update profile
 router.post("/update-profile", upload.single("profilePicture"), async (req, res) => {
   try {
@@ -44,7 +47,7 @@ router.post("/update-profile", upload.single("profilePicture"), async (req, res)
 });
 
 // Profile page
-router.get("/profile", async (req, res) => {
+router.get("/profile", newAuthCheck(), async (req, res) => {
   try {
     const userDoc = await User.findById(req.session.user._id).lean();
 
