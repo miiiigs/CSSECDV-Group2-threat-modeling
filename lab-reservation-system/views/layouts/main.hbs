@@ -37,29 +37,41 @@
   </div>
 
   {{#if user}}
-    <div {{#if create}}id="currentlyhere"{{/if}}>
-      <a href="/create">Create Reservation</a>
-    </div>
+    {{#if (eq user.role 'labtech')}}
+      <div {{#if create}}id="currentlyhere"{{/if}}>
+        <a href="/create">Create Reservation</a>
+      </div>
+    {{/if}}
+    {{#if (eq user.role 'student')}}
+      <div {{#if create}}id="currentlyhere"{{/if}}>
+        <a href="/create">Create Reservation</a>
+      </div>
+    {{/if}}
     {{#if (eq user.role 'labtech')}}
       <div {{#if viewR}}id="currentlyhere"{{/if}}>
         <a href="/view_reservation">View Reservations</a>
       </div>
+      <div {{#if search}}id="currentlyhere"{{/if}}>
+      <a href="/search">Search Profiles</a>
+    </div>
+    {{/if}}
+    {{#if (eq user.role 'admin')}}
+    <div {{#if createU}}id="currentlyhere"{{/if}}>
+        <a href="/create-account">Create Account</a>
+      </div>
+      <div {{#if delUser}}id="currentlyhere"{{/if}}>
+        <a href="/edit-account">Edit Account</a>
+      </div>
       <div {{#if delUser}}id="currentlyhere"{{/if}}>
         <a href="/delete-user">Delete User</a>
       </div>
-    {{/if}}
-    {{#if (eq user.role 'admin')}}
-      <div {{#if delUser}}id="currentlyhere"{{/if}}>
-        <a href="/delete-user">Delete User</a>
+      <div {{#if temp}}id="currentlyhere"{{/if}}>
+        <a href="/temp">Temp Test</a>
       </div>
     {{/if}}
 
     <div {{#if viewP}}id="currentlyhere"{{/if}}>
       <a href="/profile">View Profile</a>
-    </div>
-
-    <div {{#if search}}id="currentlyhere"{{/if}}>
-      <a href="/search">Search Profiles</a>
     </div>
 
     <div>
