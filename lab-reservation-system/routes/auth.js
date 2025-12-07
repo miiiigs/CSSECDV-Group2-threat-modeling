@@ -107,7 +107,7 @@ router.post("/register", async (req, res) => {
     // Password policy enforcement
     const password = req.body.password;
     const minLength = 8;
-    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
     if (!password || password.length < minLength) {
       return res.status(400).send("Password must be at least 8 characters long.");
     }
