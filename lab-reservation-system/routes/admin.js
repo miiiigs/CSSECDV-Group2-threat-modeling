@@ -4,14 +4,14 @@ const User = require("../models/User");
 const Error_Log = require("../models/Error_Log");
 const userController = require('../controllers/delUserController');
 
-// Import isAuthenticated middleware
+// Import auth middleware
 const { isAuthenticated, newAuthCheck,  requireRole } = require('../middleware/auth');
 
 // 🔎 Search
 router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
-  const query = {};
+  const query = {'role': 'student'};
 
   if (username) query.username = { $regex: username, $options: 'i' };
   if (fullname) {
@@ -68,12 +68,6 @@ router.get("/delete-user", requireRole('admin'), async (req, res) => {
   }
 });
 
-router.post('/delete-post', userController.deleteUser);
-
-// 🔎 Test for new admin
-router.get('/temp', requireRole('admin'), async (req, res) => {
-  res.render('partials/admin_test', {
-  });
-});
+router.post('/delete-post', requireRole('admin'), userController.deleteUser);
 
 module.exports = router; 

@@ -11,7 +11,7 @@ const { newAuthCheck,  requireRole } = require('../middleware/auth');
 router.get('/search', requireRole('admin'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
-  const query = {};
+  const query = {'role': 'student'};
 
   if (username) query.username = { $regex: username, $options: 'i' };
   if (fullname) {
