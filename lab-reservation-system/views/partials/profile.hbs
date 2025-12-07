@@ -19,6 +19,7 @@
     <button onclick="document.getElementById('editProfileModal').style.display='block'" class="profile-tab-btn profile-tab-green">✏️ Edit Profile</button>
     <button onclick="document.getElementById('changePasswordModal').style.display='block'" class="profile-tab-btn profile-tab-green">🔒 Change Password</button>
     <button onclick="document.getElementById('securityQuestionsModal').style.display='block'" class="profile-tab-btn profile-tab-green">🛡️ Set Security Questions</button>
+    <button onclick="document.getElementById('loginHistoryModal').style.display='block'" class="profile-tab-btn profile-tab-green">🕒 Login History</button>
   </div>
 
   <div id="changePasswordModal" class="profile-modal">
@@ -33,6 +34,24 @@
     <div class="profile-modal-content">
       <span class="profile-modal-close" onclick="document.getElementById('securityQuestionsModal').style.display='none'">&times;</span>
       {{> profile_security_questions }}
+    </div>
+  </div>
+
+  <!-- Login History Modal -->
+  <div id="loginHistoryModal" class="profile-modal">
+    <div class="profile-modal-content">
+      <span class="profile-modal-close" onclick="document.getElementById('loginHistoryModal').style.display='none'">&times;</span>
+      <h3 style="color:#364b46;font-weight:700;margin-bottom:18px;text-align:center;">Login History</h3>
+      {{#if user.lastLogin}}
+        <div style="background:#f5f5f5;border:1px solid #7EAE96;border-radius:10px;padding:12px 18px;margin-bottom:18px;color:#364b46;font-size:1.05em;">
+          <strong>Last successful login:</strong> {{user.lastLogin}}
+        </div>
+      {{/if}}
+      {{#if user.lastFailedLogin}}
+        <div style="background:#fff3f3;border:1.5px solid #c0392b;border-radius:10px;padding:12px 18px;margin-bottom:18px;color:#c0392b;font-size:1.05em;">
+          <strong>Last failed login:</strong> {{user.lastFailedLogin}}
+        </div>
+      {{/if}}
     </div>
   </div>
 
@@ -145,6 +164,17 @@
     <p>Contact: {{user.phoneNumber}}</p>
     <p>Bio: {{user.bio}}</p>
   </div>
+
+  {{#if user.lastLogin}}
+    <div style="background:#f5f5f5;border:1px solid #7EAE96;border-radius:10px;padding:12px 18px;margin-bottom:18px;color:#364b46;font-size:1.05em;">
+      <strong>Last successful login:</strong> {{user.lastLogin}}
+    </div>
+  {{/if}}
+  {{#if user.lastFailedLogin}}
+    <div style="background:#fff3f3;border:1px solid #c0392b;border-radius:10px;padding:12px 18px;margin-bottom:18px;color:#c0392b;font-size:1.05em;">
+      <strong>Last failed login:</strong> {{user.lastFailedLogin}}
+    </div>
+  {{/if}}
 </div>
 <div class="view-tab">
   <div>

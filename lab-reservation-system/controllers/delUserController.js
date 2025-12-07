@@ -25,19 +25,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const deleteUser = async (req, res) => {
   try {
+    const Error_Log = require("../models/Error_Log");
     const studentId = req.body.selectedUser;
+    // Strict validation: studentId must be a string of digits, length 6-10
+    if (!studentId || typeof studentId !== "string" || !/^[0-9]{6,10}$/.test(studentId)) {
+      let error = new Error_Log({
+        type: "Validation Failure",
+        where: "Controller: deleteUser",
+        description: "Invalid studentId input",
+        error: studentId
+      });
+      await error.save();
+      return res.status(400).send("Invalid input. Please try again.");
+    }
     const studentDat = await User.findOne({'id': studentId}).lean();
+    if (!studentDat) {
+      let error = new Error_Log({
+        type: "Validation Failure",
+        where: "Controller: deleteUser",
+        description: "Student not found for deletion",
+        error: studentId
+      });
+      await error.save();
+      return res.status(404).send("User not found.");
+    }
     await User.deleteOne({'id': studentId});
-    //res.status(200).json({ message: "Student " + studentDat.id + " | " + studentDat.firstName + " " + studentDat.lastName + " was deleted successfully!" });
-    //alert("Student " + studentDat.id + " | " + studentDat.firstName + " " + studentDat.lastName + " was deleted successfully!");
     var users = await User.find({'role': 'student'}).lean(); // Get all students (ie non-admin)
     res.render("partials/admin_delete_user", { 
       usersToDelete: users, 
       delUser: true
     });
   } catch (err) {
-    console.log("ERROR: " + err);
-    res.status(500).send("Error deleting user");
+    let error = new Error_Log({
+      type: "Error",
+      where: "Controller: deleteUser",
+      description: "Error deleting user",
+      error: err
+    });
+    await error.save();
+    res.status(500).send("Server error. Please contact admin.");
   }
 }
 

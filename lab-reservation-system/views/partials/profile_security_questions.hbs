@@ -1,20 +1,40 @@
 <div class="security-questions-container" style="max-width:400px;margin:0 auto;padding:0;background:none;">
   <h2 style="text-align:center;color:#1a237e;font-weight:700;margin-bottom:18px;">Set Security Questions</h2>
-  <form action="/set-security-questions" method="POST" style="background:#fff;padding:24px 20px 16px 20px;border-radius:16px;box-shadow:0 2px 12px #7EAE96cc;display:flex;flex-direction:column;gap:18px;border:1.5px solid #7EAE96;">
+  {{!-- Strong security questions for password reset --}}
+  {{!-- Replace with a dropdown for each question --}}
+  <form id="set-security-questions-form" action="/set-security-questions" method="POST" style="background:#fff;padding:24px 20px 16px 20px;border-radius:16px;box-shadow:0 2px 12px #7EAE96cc;display:flex;flex-direction:column;gap:18px;border:1.5px solid #7EAE96;">
     <div style="display:flex;flex-direction:column;gap:6px;">
       <label style="font-weight:600;color:#364b46;">Security Question 1</label>
-      <input type="text" name="question1" value="{{user.securityQuestions.0.question}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
-      <input type="text" name="answer1" value="{{user.securityQuestions.0.answer}}" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+      <select name="question1" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;">
+        <option value="What was the name of your first stuffed animal?">What was the name of your first stuffed animal?</option>
+        <option value="What is the title of a book that changed your life?">What is the title of a book that changed your life?</option>
+        <option value="What was your childhood nickname that only a few people knew?">What was your childhood nickname that only a few people knew?</option>
+        <option value="What is the name of a street you lived on before age 10?">What is the name of a street you lived on before age 10?</option>
+        <option value="What is a memorable place you visited as a child?">What is a memorable place you visited as a child?</option>
+        <option value="What was the make and model of your first bicycle?">What was the make and model of your first bicycle?</option>
+        <option value="Who was your favorite teacher in elementary school?">Who was your favorite teacher in elementary school?</option>
+        <option value="What is the name of a friend you met before high school?">What is the name of a friend you met before high school?</option>
+      </select>
+      <input type="text" name="answer1" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;">
       <label style="font-weight:600;color:#364b46;">Security Question 2</label>
-      <input type="text" name="question2" value="{{user.securityQuestions.1.question}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
-      <input type="text" name="answer2" value="{{user.securityQuestions.1.answer}}" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+      <select name="question2" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;">
+        <option value="What was the name of your first stuffed animal?">What was the name of your first stuffed animal?</option>
+        <option value="What is the title of a book that changed your life?">What is the title of a book that changed your life?</option>
+        <option value="What was your childhood nickname that only a few people knew?">What was your childhood nickname that only a few people knew?</option>
+        <option value="What is the name of a street you lived on before age 10?">What is the name of a street you lived on before age 10?</option>
+        <option value="What is a memorable place you visited as a child?">What is a memorable place you visited as a child?</option>
+        <option value="What was the make and model of your first bicycle?">What was the make and model of your first bicycle?</option>
+        <option value="Who was your favorite teacher in elementary school?">Who was your favorite teacher in elementary school?</option>
+        <option value="What is the name of a friend you met before high school?">What is the name of a friend you met before high school?</option>
+      </select>
+      <input type="text" name="answer2" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
     </div>
     <button type="submit" style="background:#364b46;color:#fff;font-weight:700;border:none;border-radius:10px;padding:12px 0;font-size:1.08em;box-shadow:0 2px 12px #7EAE9644;cursor:pointer;transition:background 0.2s;">Save Security Questions</button>
   </form>
   <script>
-    document.getElementById('security-questions-form').addEventListener('submit', async function(e) {
+    document.getElementById('set-security-questions-form').addEventListener('submit', async function(e) {
       e.preventDefault();
       document.getElementById('security-questions-message').textContent = '';
       const question1 = document.querySelector('select[name="question1"]').value;
