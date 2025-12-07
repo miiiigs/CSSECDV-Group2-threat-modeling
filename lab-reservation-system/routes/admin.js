@@ -5,7 +5,7 @@ const Error_Log = require("../models/Error_Log");
 const userController = require('../controllers/delUserController');
 
 // Import isAuthenticated middleware
-const { isAuthenticated } = require('../middleware/auth');
+const { isAuthenticated, newAuthCheck,  requireRole } = require('../middleware/auth');
 
 // 🔎 Search
 router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
@@ -31,7 +31,7 @@ router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
 });
 
 // ❌ Admin: Delete User
-router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
+router.get("/delete-user", requireRole('admin'), async (req, res) => {
   try {
     const {id, email, username, role} = req.query;
     const query = {};
@@ -71,7 +71,7 @@ router.get("/delete-user", isAuthenticated('LabTech'), async (req, res) => {
 router.post('/delete-post', userController.deleteUser);
 
 // 🔎 Test for new admin
-router.get('/temp', isAuthenticated('Admin'), async (req, res) => {
+router.get('/temp', requireRole('admin'), async (req, res) => {
   res.render('partials/admin_test', {
   });
 });
