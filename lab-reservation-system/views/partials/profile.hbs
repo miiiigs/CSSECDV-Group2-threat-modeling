@@ -13,38 +13,130 @@
   <h3>{{user.lastName}}, {{user.firstName}}</h3>
   <h4>{{user.id}}</h4>
  
-  <button onclick="document.getElementById('editModal').style.display='block'">
-    Edit Profile
-  </button>
+  <!-- Tabs as vertical column -->
+  <div style="display:flex;flex-direction:column;gap:18px;margin-top:24px;max-width:220px;">
+    <button onclick="document.getElementById('editProfileModal').style.display='block'" class="profile-tab-btn profile-tab-green">✏️ Edit Profile</button>
+    <button onclick="document.getElementById('changePasswordModal').style.display='block'" class="profile-tab-btn profile-tab-green">🔒 Change Password</button>
+    <button onclick="document.getElementById('securityQuestionsModal').style.display='block'" class="profile-tab-btn profile-tab-green">🛡️ Set Security Questions</button>
+  </div>
+
+  <div id="changePasswordModal" class="profile-modal">
+    <div class="profile-modal-content">
+      <span class="profile-modal-close" onclick="document.getElementById('changePasswordModal').style.display='none'">&times;</span>
+      {{> profile_change_password }}
+    </div>
+  </div>
+
+  <!-- Security Questions Section -->
+  <div id="securityQuestionsModal" class="profile-modal">
+    <div class="profile-modal-content">
+      <span class="profile-modal-close" onclick="document.getElementById('securityQuestionsModal').style.display='none'">&times;</span>
+      {{> profile_security_questions }}
+    </div>
+  </div>
+
+<style>
+  .profile-tab-btn {
+    background: #364b46;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 0;
+    font-size: 1.08em;
+    font-weight: 700;
+    box-shadow: 0 2px 12px #7EAE9644;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+    width: 100%;
+    margin: 0 auto;
+    letter-spacing: 0.02em;
+  }
+  .profile-tab-btn:hover, .profile-tab-green:hover {
+    background: #7EAE96;
+    color: #364b46;
+    box-shadow: 0 4px 16px #364b4644;
+  }
+  .profile-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #7EAE96cc;
+    padding: 32px 28px 24px 28px;
+    min-width: 340px;
+    max-width: 95vw;
+    position: relative;
+    animation: slideDown 0.2s;
+    border: 1.5px solid #7EAE96;
+  }
+  .profile-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30,40,80,0.25);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s;
+  }
+  .profile-modal[style*="display: block"] {
+    display: flex !important;
+  }
+  .profile-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 2em;
+    color: #364b46;
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+  }
+  .profile-modal-close:hover {
+    color: #7EAE96;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
 
   <!-- modal area -->
   <div
-    id="editModal"
-    style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:white; padding:20px; border:1px solid #ccc; border-radius:10px;"
+    id="editProfileModal"
+    class="profile-modal"
   >
-    <form action="/update-profile" method="POST" enctype="multipart/form-data">
-      <label>Change Profile Picture:</label><br />
-      <input type="file" name="profilePicture" accept="image/*" /><br /><br />
-
-      <label>Username:</label><br />
-      <input type="text" name="username" value="{{user.username}}" /><br />
-
-      <label>Pronouns:</label><br />
-      <input type="text" name="pronouns" value="{{user.pronouns}}" /><br />
-
-      <label>Phone Number:</label><br />
-      <input type="text" name="phoneNumber" value="{{user.phoneNumber}}" /><br
-      />
-
-      <label>Short Bio:</label><br />
-      <textarea name="bio">{{user.bio}}</textarea><br /><br />
-
-      <button type="submit">Save Changes</button>
-      <button
-        type="button"
-        onclick="document.getElementById('editModal').style.display='none'"
-      >Cancel</button>
-    </form>
+    <div class="profile-modal-content">
+      <span class="profile-modal-close" onclick="document.getElementById('editProfileModal').style.display='none'">&times;</span>
+      <form action="/update-profile" method="POST" enctype="multipart/form-data" style="background:#fff;padding:24px 20px 16px 20px;border-radius:16px;box-shadow:0 2px 12px #7EAE96cc;display:flex;flex-direction:column;gap:18px;border:1.5px solid #7EAE96;">
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-weight:600;color:#364b46;">Change Profile Picture</label>
+          <input type="file" name="profilePicture" accept="image/*" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-weight:600;color:#364b46;">Username</label>
+          <input type="text" name="username" value="{{user.username}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-weight:600;color:#364b46;">Pronouns</label>
+          <input type="text" name="pronouns" value="{{user.pronouns}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-weight:600;color:#364b46;">Phone Number</label>
+          <input type="text" name="phoneNumber" value="{{user.phoneNumber}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <label style="font-weight:600;color:#364b46;">Short Bio</label>
+          <textarea name="bio" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;">{{user.bio}}</textarea>
+        </div>
+        <button type="submit" style="background:#364b46;color:#fff;font-weight:700;border:none;border-radius:10px;padding:12px 0;font-size:1.08em;box-shadow:0 2px 12px #7EAE9644;cursor:pointer;transition:background 0.2s;">Save Changes</button>
+      </form>
+    </div>
   </div>
 
   <div>

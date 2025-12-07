@@ -6,21 +6,27 @@
       <label class="dropme" for="email">DLSU Email</label>
       <input class="dropme-input" type="email" id="email" name="email" required />
 
+        <div id="emailError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
       <label class="dropme" for="password">Password</label>
       <input class="dropme-input" type="password" id="password" name="password" required />
 
+        <div id="passwordError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
       <label class="dropme" for="confirmPassword">Confirm Password</label>
       <input class="dropme-input" type="password" id="confirmPassword" name="confirmPassword" required />
 
+        <div id="confirmPasswordError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
       <label for="firstName">First Name</label>
       <input class="dropme-input" type="text" id="firstName" name="firstName" required />
 
+        <div id="firstNameError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
       <label for="lastName">Last Name</label>
       <input class="dropme-input" type="text" id="lastName" name="lastName" required />
 
+        <div id="lastNameError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
       <label for="id">ID Number</label>
       <input class="dropme-input" type="text" id="id" name="id" required />
 
+        <div id="idError" style="color:red;font-size:0.95em;margin-bottom:8px;"></div>
 
 
       <!-- Role selection for student/labtech registration -->
@@ -39,3 +45,60 @@
 <!-- jQuery & Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src=".../js/regQueries.js"></script>
+
+  <script>
+  $('#registrationForm').on('submit', async function(e) {
+    e.preventDefault();
+    // Clear previous errors
+    ["emailError","passwordError","confirmPasswordError","firstNameError","lastNameError","idError"].forEach(id => {
+      document.getElementById(id).textContent = '';
+    });
+    const email = $('#email').val();
+    const password = $('#password').val();
+    const confirmPassword = $('#confirmPassword').val();
+    const firstName = $('#firstName').val();
+    const lastName = $('#lastName').val();
+    const id = $('#id').val();
+    const role = $('#role').val();
+
+    let hasError = false;
+    if (!email) { $('#emailError').text('Email is required.'); hasError = true; }
+    if (!password) { $('#passwordError').text('Password is required.'); hasError = true; }
+    if (password && password.length < 8) { $('#passwordError').text('Password must be at least 8 characters.'); hasError = true; }
+    if (password && !/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}/.test(password)) {
+      $('#passwordError').text('Password must contain uppercase, lowercase, number, and special character.'); hasError = true;
+    }
+    if (confirmPassword !== password) { $('#confirmPasswordError').text('Passwords do not match.'); hasError = true; }
+    if (!firstName) { $('#firstNameError').text('First name is required.'); hasError = true; }
+    if (!lastName) { $('#lastNameError').text('Last name is required.'); hasError = true; }
+    if (!id) { $('#idError').text('ID number is required.'); hasError = true; }
+    if (hasError) return;
+
+    try {
+      const res = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, confirmPassword, firstName, lastName, id, role })
+      });
+      if (res.ok) {
+        window.location.href = '/login';
+      } else {
+        const text = await res.text();
+        // Backend error handling
+        if (text.includes('User ID already exists')) {
+          $('#idError').text('This ID number is already registered.');
+        } else if (text.includes('Password must be at least 8 characters')) {
+          $('#passwordError').text('Password must be at least 8 characters.');
+        } else if (text.includes('Password must contain')) {
+          $('#passwordError').text('Password must contain uppercase, lowercase, number, and special character.');
+        } else if (text.includes('Email already exists')) {
+          $('#emailError').text('This email is already registered.');
+        } else {
+          $('#formMessage').html('<span style="color:red;">'+text+'</span>');
+        }
+      }
+    } catch (err) {
+      $('#formMessage').html('<span style="color:red;">Server error.</span>');
+    }
+  });
+  </script>

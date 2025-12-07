@@ -89,6 +89,21 @@ const UserSchema = new mongoose.Schema({
   data: Buffer,
   contentType: String
   }
+  ,
+  updatedAt: {
+    type: Date
+  }
+  ,
+  // Security questions for password reset
+  securityQuestions: [
+    {
+      question: { type: String },
+      answerHash: { type: String }
+    }
+  ],
+  // For password reset tokens
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date }
 });
 
 UserSchema.pre('save', async function (next) {

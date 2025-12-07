@@ -105,15 +105,20 @@ if (loginForm) {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Login successful!");
-        sessionStorage.setItem("currentUser", email);
-        window.location.href = "/index";
+          sessionStorage.setItem("currentUser", email);
+          window.location.href = "/index";
       } else {
-        alert(data.message || "Invalid email or password.");
+          const loginError = document.getElementById("login-error");
+          if (loginError) {
+            loginError.textContent = data.message || "Invalid email or password.";
+          }
       }
     } catch (err) {
       console.error("Login error:", err);
-      alert("Error connecting to server.");
+        const loginError = document.getElementById("login-error");
+        if (loginError) {
+          loginError.textContent = "Error connecting to server.";
+        }
     }
   });
 }
