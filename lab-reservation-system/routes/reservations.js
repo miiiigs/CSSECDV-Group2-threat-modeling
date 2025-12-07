@@ -4,8 +4,11 @@ const User = require("../models/User");
 const Reservation = require("../models/Reservation");
 const Error_Log = require("../models/Error_Log");
 
+// Import auth middleware
+const { requireRole } = require('../middleware/auth');
+
 // 📅 Create Reservation page
-router.get("/create", async (req, res) => {
+router.get("/create", requireRole('labtech','student') , async (req, res) => {
   try {
     const user = await User.findById(req.session.user._id).lean();
       if (user.role === 'labtech')
@@ -28,7 +31,7 @@ router.get("/create", async (req, res) => {
 });
 
 // View reservations page
-router.get("/view_reservation", async (req, res) => {
+router.get("/view_reservation", requireRole('labtech','student') , async (req, res) => {
   try {
     const { username, lab, pcno } = req.query;
     
@@ -99,7 +102,7 @@ router.get("/view_reservation", async (req, res) => {
 });
 
 // 📥 Reserve seat API
-router.post("/api/seats/reserve", async (req, res) => {
+router.post("/api/seats/reserve", requireRole('labtech','student') , async (req, res) => {
 
   let { labNumber, seatNumber, date, startTime, endTime, user, idNum } = req.body;
   /*
@@ -186,7 +189,7 @@ router.post("/api/seats/reserve", async (req, res) => {
 });
 
 // 📤 Fetch reservations API
-router.get('/api/reservations/available', async (req, res) => {
+router.get('/api/reservations/available', requireRole('labtech','student') , async (req, res) => {
   try {
     const { lab, date, start, end } = req.query;
     
@@ -244,7 +247,7 @@ router.get('/api/reservations/available', async (req, res) => {
 });
 
 // 🗑️ Delete reservation API
-router.delete('/api/reservations/:id', async (req, res) => {
+router.delete('/api/reservations/:id', requireRole('labtech','student') , async (req, res) => {
   try {
     const { id } = req.params;
     

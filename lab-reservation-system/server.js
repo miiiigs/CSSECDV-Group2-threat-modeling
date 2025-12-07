@@ -22,6 +22,9 @@ const userController = require('./controllers/delUserController');
 // Setup multer for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Import auth for middleware
+const { newAuthCheck } = require('./middleware/auth');
+
 const app = express();
 const PORT = 3000;
 
@@ -81,9 +84,9 @@ app.set("view options", { layout: "main" });
 // 🟢 Routes
 app.use("/", pageRoutes);
 app.use("/", authRoutes);
-app.use("/", profileRoutes);
-app.use("/", reservationRoutes);
-app.use("/", adminRoutes);
+app.use("/", newAuthCheck(), profileRoutes);
+app.use("/", newAuthCheck(), reservationRoutes);
+app.use("/", newAuthCheck(), adminRoutes);
 
 
 // 🚀 Start server
