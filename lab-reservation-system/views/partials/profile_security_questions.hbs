@@ -1,0 +1,51 @@
+<div class="security-questions-container" style="max-width:400px;margin:0 auto;padding:0;background:none;">
+  <h2 style="text-align:center;color:#1a237e;font-weight:700;margin-bottom:18px;">Set Security Questions</h2>
+  <form action="/set-security-questions" method="POST" style="background:#fff;padding:24px 20px 16px 20px;border-radius:16px;box-shadow:0 2px 12px #7EAE96cc;display:flex;flex-direction:column;gap:18px;border:1.5px solid #7EAE96;">
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <label style="font-weight:600;color:#364b46;">Security Question 1</label>
+      <input type="text" name="question1" value="{{user.securityQuestions.0.question}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+      <input type="text" name="answer1" value="{{user.securityQuestions.0.answer}}" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;">
+      <label style="font-weight:600;color:#364b46;">Security Question 2</label>
+      <input type="text" name="question2" value="{{user.securityQuestions.1.question}}" style="padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+      <input type="text" name="answer2" value="{{user.securityQuestions.1.answer}}" placeholder="Answer" style="margin-top:6px;padding:8px 12px;border:1px solid #bfc7d5;border-radius:8px;font-size:1em;background:#f5f5f5;color:#222;" required />
+    </div>
+    <button type="submit" style="background:#364b46;color:#fff;font-weight:700;border:none;border-radius:10px;padding:12px 0;font-size:1.08em;box-shadow:0 2px 12px #7EAE9644;cursor:pointer;transition:background 0.2s;">Save Security Questions</button>
+  </form>
+  <script>
+    document.getElementById('security-questions-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      document.getElementById('security-questions-message').textContent = '';
+      const question1 = document.querySelector('select[name="question1"]').value;
+      const answer1 = document.querySelector('input[name="answer1"]').value;
+      const question2 = document.querySelector('select[name="question2"]').value;
+      const answer2 = document.querySelector('input[name="answer2"]').value;
+      if (!question1 || !answer1 || !question2 || !answer2) {
+        document.getElementById('security-questions-message').textContent = 'All fields are required.';
+        return;
+      }
+      try {
+        const res = await fetch('/profile/set-security-questions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ questions: [
+            { question: question1, answer: answer1 },
+            { question: question2, answer: answer2 }
+          ] })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById('security-questions-message').style.color = 'green';
+          document.getElementById('security-questions-message').textContent = data.message || 'Security questions saved!';
+        } else {
+          document.getElementById('security-questions-message').style.color = 'red';
+          document.getElementById('security-questions-message').textContent = data.message || 'Save failed.';
+        }
+      } catch (err) {
+        document.getElementById('security-questions-message').style.color = 'red';
+        document.getElementById('security-questions-message').textContent = 'Server error.';
+      }
+    });
+  </script>
+</div>

@@ -22,6 +22,9 @@ const userController = require('./controllers/delUserController');
 // Setup multer for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Import auth for middleware
+const { newAuthCheck } = require('./middleware/auth');
+
 const app = express();
 const PORT = 3000;
 
@@ -74,46 +77,16 @@ app.set("view options", { layout: "main" });
 
 // Authenticator
 
-function isAuthenticated(role) {
-  if(role == 'LabTech'){
-    var val = true;
-    if(req.session && req.session.user.isLabtech == val){
-    next()
-    } else {
-      res.redirect('/logout');
-    }
-  } 
-  else if (role == 'Student'){
-    var val = false;
-    if(req.session && req.session.user.isLabtech == val){
-      next()
-    } else {
-      res.redirect('/logout');
-    }
-  }
-  else {
+// Deprecated: Use middleware/auth.js for role checks
 
-      //add error here
-      // Create error log
-      let error = new Error_Log({
-        type: "Warn",
-        where: "isAuthenticated",
-        description: "User attempted to enter page they are not authenticated in",
-      });
-      error.save();
-      
-      res.redirect('/logout');
-  }
 
-  
-}
 
 // 🟢 Routes
 app.use("/", pageRoutes);
 app.use("/", authRoutes);
-app.use("/", profileRoutes);
-app.use("/", reservationRoutes);
-app.use("/", adminRoutes);
+app.use("/", newAuthCheck(), profileRoutes);
+app.use("/", newAuthCheck(), reservationRoutes);
+app.use("/", newAuthCheck(), adminRoutes);
 
 
 // 🚀 Start server

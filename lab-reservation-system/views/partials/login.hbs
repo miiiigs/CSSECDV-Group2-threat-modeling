@@ -2,6 +2,7 @@
   <div class="form-container">
     <div>
       <h2>Login</h2>
+
       <form id="login-form" action="#" method="post">
         <label class="dropme" for="email">DLSU Email</label>
         <input class="dropme-input" type="email" id="email" name="email" required />
@@ -9,13 +10,40 @@
         <label class="dropme" for="password">Password</label>
         <input class="dropme-input" type="password" id="password" name="password" required />
 
+          <div id="login-error" style="color:red; margin-top:10px;"></div>
+
         <button id="login-button" type="submit">Log In</button>
       </form>
+
+      <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          document.getElementById('login-error').textContent = '';
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          try {
+            const res = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (res.ok) {
+              window.location.href = '/index';
+            } else {
+              document.getElementById('login-error').textContent = data.message || 'Login failed.';
+            }
+          } catch (err) {
+            document.getElementById('login-error').textContent = 'Server error.';
+          }
+        });
+      </script>
 
       <div class="after-form">
         <label for="remember">Remember Me</label>
         <input type="checkbox" id="remember" name="remember" />
         <p>Don't have an account? <a href="/register">Register here</a></p>
+        <p style="margin-top:10px;"><a href="/reset-password" style="color:#1a237e;font-weight:600;">Forgot password?</a></p>
       </div>
     </div>
   </div>

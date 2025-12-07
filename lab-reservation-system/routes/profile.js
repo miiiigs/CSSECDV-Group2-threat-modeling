@@ -5,8 +5,13 @@ const Reservation = require("../models/Reservation");
 const Error_Log = require("../models/Error_Log");
 const multer = require("multer");
 
+const bcrypt = require("bcrypt");
+
 // 📦 Multer (store uploaded files in memory)
 const upload = multer({ storage: multer.memoryStorage() });
+
+// Import isAuthenticated middleware
+const { isAuthenticated, newAuthCheck } = require('../middleware/auth');
 
 // 📸 Update profile
 router.post("/update-profile", upload.single("profilePicture"), async (req, res) => {
@@ -44,7 +49,7 @@ router.post("/update-profile", upload.single("profilePicture"), async (req, res)
 });
 
 // Profile page
-router.get("/profile", async (req, res) => {
+router.get("/profile", newAuthCheck(), async (req, res) => {
   try {
     const userDoc = await User.findById(req.session.user._id).lean();
 
@@ -86,3 +91,124 @@ router.get("/profile", async (req, res) => {
 });
 
 module.exports = router; 
+
+// Set security questions for logged-in user
+router.post("/set-security-questions", async (req, res) => {
+  try {
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ message: "Not authenticated." });
+    }
+    const { questions } = req.body;
+    if (!Array.isArray(questions) || questions.length < 2) {
+      return res.status(400).json({ message: "Two security questions required." });
+    }
+    // Hash answers
+    const hashedQuestions = await Promise.all(questions.map(async q => ({
+      question: q.question,
+      answerHash: await require('bcrypt').hash(q.answer, 10)
+    })));
+    const user = await User.findById(req.session.user._id);
+    user.securityQuestions = hashedQuestions;
+    await user.save();
+    res.json({ message: "Security questions saved!" });
+  } catch (err) {
+    res.status(500).json({ message: "Server error." });
+  }
+});
+
+// Change password route (AJAX)
+router.post("/change-password", async (req, res) => {
+  try {
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ message: "Not authenticated." });
+    }
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: "Missing fields." });
+    }
+    const user = await User.findById(req.session.user._id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    // Check current password
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      let error = new Error_Log({
+        type: "Warn",
+        where: "Profile : Post /change-password",
+        description: `Incorrect current password for user ${user.email}`,
+      });
+      await error.save();
+      return res.status(400).json({ message: "Current password is incorrect." });
+    }
+
+    // Enforce minimum password age (1 day)
+    if (user.passwordHistory && user.passwordHistory.length > 0) {
+      const lastChange = user.passwordHistory[user.passwordHistory.length - 1];
+      if (lastChange && user.updatedAt) {
+        const now = new Date();
+        const minAgeMs = 24 * 60 * 60 * 1000; // 1 day
+        if (now - user.updatedAt < minAgeMs) {
+          return res.status(400).json({ message: "You must wait at least 1 day before changing your password again." });
+        }
+      }
+    }
+
+    // Enforce password complexity
+    const minLength = 8;
+    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    if (newPassword.length < minLength) {
+      return res.status(400).json({ message: "Password must be at least 8 characters long." });
+    }
+    if (!complexityRegex.test(newPassword)) {
+      return res.status(400).json({ message: "Password must contain uppercase, lowercase, number, and special character." });
+    }
+
+    // Enforce password history (no reuse of last 5)
+    const prevHashes = user.passwordHistory || [];
+    for (let hash of prevHashes.slice(-5)) {
+      if (await bcrypt.compare(newPassword, hash)) {
+        return res.status(400).json({ message: "You cannot reuse your last 5 passwords." });
+      }
+    }
+
+    // Hash new password
+    // const salt = await bcrypt.genSalt(10);
+    // const newHash = await bcrypt.hash(newPassword, salt);
+
+    // Update password and history
+    user.passwordHistory = [...(user.passwordHistory || []), user.password];
+    if (user.passwordHistory.length > 5) {
+      user.passwordHistory = user.passwordHistory.slice(-5);
+    }
+    user.password = newPassword; // Set plain password, let pre-save hook hash it
+    user.updatedAt = new Date();
+    await user.save();
+
+    let log = new Error_Log({
+      type: "Info",
+      where: "Profile : Post /change-password",
+      description: `Password changed for user ${user.email}`,
+    });
+    await log.save();
+
+    res.json({ message: "Password changed successfully." });
+  } catch (err) {
+    let error = new Error_Log({
+      type: "Error",
+      where: "Profile : Post /change-password",
+      description: `Error changing password for user ${req.session?.user?.email || 'unknown'}: ${err.message}`,
+      error: {
+        stack: err.stack,
+        name: err.name,
+        message: err.message,
+        code: err.code || null,
+        body: req.body,
+        session: req.session?.user || null
+      }
+    });
+    await error.save();
+    res.status(500).json({ message: "Server error." });
+  }
+});

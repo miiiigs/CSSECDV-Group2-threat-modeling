@@ -30,7 +30,7 @@ const deleteUser = async (req, res) => {
     await User.deleteOne({'id': studentId});
     //res.status(200).json({ message: "Student " + studentDat.id + " | " + studentDat.firstName + " " + studentDat.lastName + " was deleted successfully!" });
     //alert("Student " + studentDat.id + " | " + studentDat.firstName + " " + studentDat.lastName + " was deleted successfully!");
-    var users = await User.find({'isLabtech': false}).lean(); // Get all students (ie non-admin)
+    var users = await User.find({'role': 'student'}).lean(); // Get all students (ie non-admin)
     res.render("partials/admin_delete_user", { 
       usersToDelete: users, 
       delUser: true
