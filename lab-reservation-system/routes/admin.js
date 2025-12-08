@@ -68,6 +68,35 @@ router.get("/delete-user", requireRole('admin'), async (req, res) => {
   }
 });
 
+// Admin: View logs
+router.get("/log-history", requireRole('admin'), async (req, res) => {
+  try {
+  
+  const {category} = req.query;
+  const query = {};
+  
+  if(category != "All")
+    query.type = category;
+  _logs = await Error_Log.find(query).lean();
+
+  res.render("partials/admin_log_history", {
+    logs: _logs,
+    query: req.query
+  });
+
+  } catch (err) {
+    // Create error log
+      let error = new Error_Log({
+        type: "Error",
+        where: "Route Admin : Get /log-history",
+        description: "Error viewing logs",
+        error: err
+      });
+      await error.save();
+  }
+});
+
+
 router.post('/delete-post', requireRole('admin'), userController.deleteUser);
 
 module.exports = router; 
