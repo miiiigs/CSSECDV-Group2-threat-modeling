@@ -7,8 +7,11 @@ const userController = require('../controllers/delUserController');
 // Import auth middleware
 const { isAuthenticated, newAuthCheck,  requireRole } = require('../middleware/auth');
 
-// 🔎 Search
-router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
+// Apply authentication to all admin routes
+router.use(newAuthCheck());
+
+// 🔎 Search (LabTech or Admin)
+router.get('/search', requireRole('labtech', 'admin'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
   const query = {'role': 'student'};
@@ -90,13 +93,35 @@ router.get("/log-history", requireRole('admin'), async (req, res) => {
         type: "Error",
         where: "Route Admin : Get /log-history",
         description: "Error viewing logs",
-        error: err
+        // Access control: only admins can view logs
+        if (!req.session.user || req.session.user.role !== 'admin') {
+          let error = new Error_Log({
+            type: "Access Control Failure",
+            where: "Route Admin : Get /log-history",
+            description: `Unauthorized log access attempt by user ${req.session.user?.email || 'unknown'}`,
+            error: req.session.user
+          });
+          await error.save();
+          return res.status(403).send("Access denied. Admins only.");
+        }
+        try {
+          const {category} = req.query;
+          const query = {};
+          if(category != "All")
+            query.type = category;
+          const _logs = await Error_Log.find(query).lean();
+          res.render("partials/admin_log_history", {
+            logs: _logs,
+            query: req.query
+          });
+        } catch (err) {
+          let error = new Error_Log({
+            type: "Error",
+            where: "Route Admin : Get /log-history",
+            description: "Error viewing logs",
+            error: err
+          });
+          await error.save();
+          res.status(500).send("Error viewing logs");
+        }
       });
-      await error.save();
-  }
-});
-
-
-router.post('/delete-post', requireRole('admin'), userController.deleteUser);
-
-module.exports = router; 

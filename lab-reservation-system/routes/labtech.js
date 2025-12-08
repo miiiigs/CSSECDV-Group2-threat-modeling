@@ -7,7 +7,10 @@ const userController = require('../controllers/delUserController');
 // Import isAuthenticated middleware
 const { newAuthCheck,  requireRole } = require('../middleware/auth');
 
-// 🔎 Search
+// Apply authentication to all labtech routes
+router.use(newAuthCheck());
+
+// 🔎 Search (admin only)
 router.get('/search', requireRole('admin'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 

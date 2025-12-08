@@ -28,6 +28,15 @@ function isAuthenticated(role) {
     }
     else {
       // Invalid role specified
+      // Log access control failure
+      const Error_Log = require('../models/Error_Log');
+      let error = new Error_Log({
+        type: "Access Control Failure",
+        where: `Auth Middleware : isAuthenticated(${role})`,
+        description: `Unauthorized access attempt by user ${req.session.user?.email || 'unknown'} for role ${role}`,
+        error: req.session.user
+      });
+      error.save();
       return res.redirect('/logout');
     }
   };
@@ -44,6 +53,15 @@ function newAuthCheck() {
     if (req.session.user.role === 'student' || req.session.user.role === 'labtech' || req.session.user.role === 'admin') {
         return next();
       } else {
+        // Log access control failure
+        const Error_Log = require('../models/Error_Log');
+        let error = new Error_Log({
+          type: "Access Control Failure",
+          where: "Auth Middleware : newAuthCheck",
+          description: `Unauthorized access attempt by user ${req.session.user?.email || 'unknown'} with role ${req.session.user?.role || 'unknown'}`,
+          error: req.session.user
+        });
+        error.save();
         return res.redirect('/logout');
     }
   };
@@ -55,6 +73,15 @@ function requireRole(role) {
     if (req.session.user.role === role) {
         return next();
       } else {
+        // Log access control failure
+        const Error_Log = require('../models/Error_Log');
+        let error = new Error_Log({
+          type: "Access Control Failure",
+          where: `Auth Middleware : requireRole(${role})`,
+          description: `Unauthorized access attempt by user ${req.session.user?.email || 'unknown'} for role ${role}`,
+          error: req.session.user
+        });
+        error.save();
         return res.redirect('/logout');
       }
   };
@@ -66,6 +93,15 @@ function requireRole(role1, role2) {
     if (req.session.user.role === role1 || req.session.user.role === role2) {
         return next();
       } else {
+        // Log access control failure
+        const Error_Log = require('../models/Error_Log');
+        let error = new Error_Log({
+          type: "Access Control Failure",
+          where: `Auth Middleware : requireRole(${role1},${role2})`,
+          description: `Unauthorized access attempt by user ${req.session.user?.email || 'unknown'} for roles ${role1},${role2}`,
+          error: req.session.user
+        });
+        error.save();
         return res.redirect('/logout');
       }
   };

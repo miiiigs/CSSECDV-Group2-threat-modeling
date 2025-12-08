@@ -239,6 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+
+    // Helper to convert time value (e.g., '0900') to 'HH:MM' format
+    function toHHMM(val) {
+      if (!val || val.length !== 4) return val;
+      return val.slice(0,2) + ':' + val.slice(2);
+    }
+
     for (const comp of selectedComputers) {
       const seatNumber = comp.querySelector(".number").textContent;
 
@@ -249,8 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
           labNumber: parseInt(labNumber),
           seatNumber: parseInt(seatNumber),
           date: selectedDate,
-          startTime,
-          endTime,
+          startTime: toHHMM(startTime),
+          endTime: toHHMM(endTime),
           user: username,
         }),
       });

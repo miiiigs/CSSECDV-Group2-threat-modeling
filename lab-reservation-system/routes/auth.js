@@ -59,6 +59,7 @@ router.post("/api/login", async (req, res) => {
         lastLogin: previousLogin,
         lastFailedLogin: previousFailedLogin
       };
+      req.session.lastAuthTime = Date.now();
       return res.status(200).json({ message: "Login successful", lastLogin: previousLogin, lastFailedLogin: previousFailedLogin });
     } else {
       user.failedLoginAttempts = (user.failedLoginAttempts || 0) + 1;
