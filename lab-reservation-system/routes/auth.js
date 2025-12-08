@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
@@ -47,6 +46,9 @@ router.post("/api/login", async (req, res) => {
 
     if (await user.comparePassword(password)) {
       user.failedLoginAttempts = 0;
+      // Save previous login info before updating
+      const previousLogin = user.lastLogin;
+      const previousFailedLogin = user.lastFailedLogin;
       user.lastLogin = new Date();
       await user.save();
       req.session.user = {
@@ -54,8 +56,10 @@ router.post("/api/login", async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        lastLogin: previousLogin,
+        lastFailedLogin: previousFailedLogin
       };
-      return res.status(200).json({ message: "Login successful" });
+      return res.status(200).json({ message: "Login successful", lastLogin: previousLogin, lastFailedLogin: previousFailedLogin });
     } else {
       user.failedLoginAttempts = (user.failedLoginAttempts || 0) + 1;
       user.lastFailedLogin = new Date();
@@ -113,6 +117,20 @@ router.post("/register", async (req, res) => {
     }
     if (!complexityRegex.test(password)) {
       return res.status(400).send("Password must contain uppercase, lowercase, number, and special character.");
+    }
+
+    // Strict validation for registration fields
+    if (!/^[a-zA-Z0-9._%+-]+@dlsu\.edu\.ph$/.test(req.body.email)) {
+      return res.status(400).send("Email must be a valid DLSU email address.");
+    }
+    if (!/^[0-9]{8}$/.test(req.body.id)) {
+      return res.status(400).send("ID must be 8 digits.");
+    }
+    if (!/^[A-Za-z\s'-]{2,30}$/.test(req.body.firstName)) {
+      return res.status(400).send("First name must be 2-30 letters.");
+    }
+    if (!/^[A-Za-z\s'-]{2,30}$/.test(req.body.lastName)) {
+      return res.status(400).send("Last name must be 2-30 letters.");
     }
 
     let role = req.body.role;

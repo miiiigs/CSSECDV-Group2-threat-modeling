@@ -4,14 +4,14 @@ const User = require("../models/User");
 const Error_Log = require("../models/Error_Log");
 const userController = require('../controllers/delUserController');
 
-// Import isAuthenticated middleware
+// Import auth middleware
 const { isAuthenticated, newAuthCheck,  requireRole } = require('../middleware/auth');
 
 // 🔎 Search
 router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
-  const query = {};
+  const query = {'role': 'student'};
 
   if (username) query.username = { $regex: username, $options: 'i' };
   if (fullname) {
@@ -68,12 +68,35 @@ router.get("/delete-user", requireRole('admin'), async (req, res) => {
   }
 });
 
-router.post('/delete-post', userController.deleteUser);
+// Admin: View logs
+router.get("/log-history", requireRole('admin'), async (req, res) => {
+  try {
+  
+  const {category} = req.query;
+  const query = {};
+  
+  if(category != "All")
+    query.type = category;
+  _logs = await Error_Log.find(query).lean();
 
-// 🔎 Test for new admin
-router.get('/temp', requireRole('admin'), async (req, res) => {
-  res.render('partials/admin_test', {
+  res.render("partials/admin_log_history", {
+    logs: _logs,
+    query: req.query
   });
+
+  } catch (err) {
+    // Create error log
+      let error = new Error_Log({
+        type: "Error",
+        where: "Route Admin : Get /log-history",
+        description: "Error viewing logs",
+        error: err
+      });
+      await error.save();
+  }
 });
+
+
+router.post('/delete-post', requireRole('admin'), userController.deleteUser);
 
 module.exports = router; 

@@ -13,6 +13,9 @@ const upload = multer({ storage: multer.memoryStorage() });
 // Import isAuthenticated middleware
 const { isAuthenticated, newAuthCheck } = require('../middleware/auth');
 
+// Apply newAuthCheck to all protected routes
+router.use(newAuthCheck());
+
 // 📸 Update profile
 router.post("/update-profile", upload.single("profilePicture"), async (req, res) => {
   try {
@@ -28,6 +31,20 @@ router.post("/update-profile", upload.single("profilePicture"), async (req, res)
         data: req.file.buffer,
         contentType: req.file.mimetype,
       };
+    }
+
+    // Strict validation for profile update fields
+    if (req.body.username && !/^[A-Za-z0-9._-]{3,30}$/.test(req.body.username)) {
+      return res.status(400).send("Username must be 3-30 characters, letters, numbers, dot, underscore, or dash.");
+    }
+    if (req.body.pronouns && !/^[A-Za-z\s/-]{2,30}$/.test(req.body.pronouns)) {
+      return res.status(400).send("Pronouns must be 2-30 letters.");
+    }
+    if (req.body.phoneNumber && !/^[0-9+\-]{7,15}$/.test(req.body.phoneNumber)) {
+      return res.status(400).send("Phone number must be 7-15 digits or valid symbols.");
+    }
+    if (req.body.bio && req.body.bio.length > 200) {
+      return res.status(400).send("Bio must be 200 characters or less.");
     }
 
     await User.findByIdAndUpdate(req.session.user._id, updateFields);
@@ -101,6 +118,17 @@ router.post("/set-security-questions", async (req, res) => {
     const { questions } = req.body;
     if (!Array.isArray(questions) || questions.length < 2) {
       return res.status(400).json({ message: "Two security questions required." });
+    }
+    // List of common answers to reject
+    const commonAnswers = ["the bible", "blue", "dog", "cat", "pizza", "football", "basketball", "red", "green", "yellow", "black", "white", "123456", "password", "qwerty"];
+    // Validate answers for randomness and length
+    for (const q of questions) {
+      if (!q.answer || typeof q.answer !== "string" || q.answer.length < 4) {
+        return res.status(400).json({ message: "Answers must be at least 4 characters." });
+      }
+      if (commonAnswers.includes(q.answer.trim().toLowerCase())) {
+        return res.status(400).json({ message: "Please choose less common answers for your security questions." });
+      }
     }
     // Hash answers
     const hashedQuestions = await Promise.all(questions.map(async q => ({
@@ -212,3 +240,5 @@ router.post("/change-password", async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 });
+
+

@@ -1,0 +1,93 @@
+<body>
+    <h2>Log History</h2>
+    <form method="GET" action="/log-history" id="searchForm">
+    
+    <select id="category" name="category">
+      <option value="All">All</option>
+      <option value="Warn">Warn</option>
+      <option value="Info">Info</option>
+      <option value="Error">Error</option>
+    </select>
+
+    <button type="submit" id="searchBtn">Search</button>
+    </form>
+    <br>
+    <hr>
+    <br>
+    <!-- Results Section -->
+    <div id="results">
+      <h3>Search Results</h3>
+      <br>
+      <div class="box" id="view_box">
+      {{#if logs.length}}
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>Type</th>
+                <th>Where</th>
+                <th>Description</th>
+                <th>Timestamp</th>
+            </tr>
+            </thead>
+            <tbody id="tBodyId">
+                {{#each logs}}
+                    <tr>
+                        <td>{{this.type}}</td>
+                        <td>{{this.where}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.createdAt}}</td>
+                    </tr>
+                {{/each}}    
+            </tbody>
+        </table>
+      {{else}}
+          <p>No logs found</p>
+      {{/if}}
+      </div>
+    </div>
+</body>
+
+<script>
+    doccument.addEventListener("click", () =>{
+        const inp = document.getElementById("category").value;
+
+        if(inp){
+            const params = new URLSearchParams({category: inp});
+            const res = await fetch("/get-logs?" + params.toString());
+            const logs = await res.json();
+
+            const div = doccument.createElement("div");
+            div.id(id="view_box");
+            div.style(style="width: 100%; border-collapse: collapse;");
+
+            div.innerHTML = 
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Where</th>
+                            <th>Decription</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tBodyId">
+                        {{#each logs}}
+                            <tr>
+                                <td>{{this.type}}</td>
+                                <td>{{this.where}}</td>
+                                <td>{{this.description}}</td>
+                                <td>{{this.createdAt}}</td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            ;
+        }
+    });
+
+    doccument.addEventListener("submit", () =>{
+        const inp = document.getElementById("category").value;
+    });
+
+
+</script>
