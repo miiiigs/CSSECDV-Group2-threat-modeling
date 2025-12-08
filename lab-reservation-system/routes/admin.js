@@ -7,8 +7,11 @@ const userController = require('../controllers/delUserController');
 // Import isAuthenticated middleware
 const { isAuthenticated, newAuthCheck,  requireRole } = require('../middleware/auth');
 
-// 🔎 Search
-router.get('/search', isAuthenticated('LabTech'), async (req, res) => {
+// Apply authentication to all admin routes
+router.use(newAuthCheck());
+
+// 🔎 Search (LabTech or Admin)
+router.get('/search', requireRole('labtech', 'admin'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
   const query = {};

@@ -5,7 +5,10 @@ const Reservation = require("../models/Reservation");
 const Error_Log = require("../models/Error_Log");
 
 // Import auth middleware
-const { requireRole } = require('../middleware/auth');
+const { newAuthCheck, requireRole } = require('../middleware/auth');
+
+// Apply authentication to all reservation routes
+router.use(newAuthCheck());
 
 // 📅 Create Reservation page
 router.get("/create", requireRole('labtech','student') , async (req, res) => {
@@ -105,6 +108,58 @@ router.get("/view_reservation", requireRole('labtech','student') , async (req, r
 router.post("/api/seats/reserve", requireRole('labtech','student') , async (req, res) => {
 
   let { labNumber, seatNumber, date, startTime, endTime, user, idNum } = req.body;
+  // Strict validation
+  const Error_Log = require("../models/Error_Log");
+  if (!labNumber || isNaN(Number(labNumber)) || Number(labNumber) < 1 || Number(labNumber) > 20) {
+    let error = new Error_Log({
+      type: "Validation Failure",
+      where: "Reservation: Post /api/seats/reserve",
+      description: "Invalid labNumber",
+      error: labNumber
+    });
+    await error.save();
+    return res.status(400).json({ message: "Invalid lab number." });
+  }
+  if (!seatNumber || isNaN(Number(seatNumber)) || Number(seatNumber) < 1 || Number(seatNumber) > 50) {
+    let error = new Error_Log({
+      type: "Validation Failure",
+      where: "Reservation: Post /api/seats/reserve",
+      description: "Invalid seatNumber",
+      error: seatNumber
+    });
+    await error.save();
+    return res.status(400).json({ message: "Invalid seat number." });
+  }
+  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    let error = new Error_Log({
+      type: "Validation Failure",
+      where: "Reservation: Post /api/seats/reserve",
+      description: "Invalid date format",
+      error: date
+    });
+    await error.save();
+    return res.status(400).json({ message: "Invalid date format. Use YYYY-MM-DD." });
+  }
+  if (!startTime || !/^\d{2}:\d{2}$/.test(startTime) || !endTime || !/^\d{2}:\d{2}$/.test(endTime)) {
+    let error = new Error_Log({
+      type: "Validation Failure",
+      where: "Reservation: Post /api/seats/reserve",
+      description: "Invalid time format",
+      error: { startTime, endTime }
+    });
+    await error.save();
+    return res.status(400).json({ message: "Invalid time format. Use HH:MM." });
+  }
+  if (!user || typeof user !== "string" || user.length < 3 || user.length > 50) {
+    let error = new Error_Log({
+      type: "Validation Failure",
+      where: "Reservation: Post /api/seats/reserve",
+      description: "Invalid user",
+      error: user
+    });
+    await error.save();
+    return res.status(400).json({ message: "Invalid user." });
+  }
   /*
     if (req.session.user.isLabtech){
       try {

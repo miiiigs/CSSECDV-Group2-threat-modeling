@@ -150,6 +150,11 @@ router.post("/change-password", async (req, res) => {
     if (!req.session || !req.session.user) {
       return res.status(401).json({ message: "Not authenticated." });
     }
+    // Require recent re-authentication (within last 5 minutes)
+    const now = Date.now();
+    if (!req.session.lastAuthTime || now - req.session.lastAuthTime > 5 * 60 * 1000) {
+      return res.status(403).json({ message: "Please re-authenticate before changing your password." });
+    }
     const { currentPassword, newPassword } = req.body;
     if (!currentPassword || !newPassword) {
       return res.status(400).json({ message: "Missing fields." });
