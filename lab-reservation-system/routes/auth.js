@@ -112,7 +112,7 @@ router.post("/register", async (req, res) => {
     // Password policy enforcement
     const password = req.body.password;
     const minLength = 8;
-    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
     if (!password || password.length < minLength) {
       return res.status(400).send("Password must be at least 8 characters long.");
     }
@@ -242,7 +242,7 @@ router.post("/auth/reset-password", async (req, res) => {
     }
     // Enforce password complexity
     const minLength = 8;
-    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    const complexityRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
     if (newPassword.length < minLength) {
       return res.status(400).json({ message: "Password must be at least 8 characters long." });
     }
