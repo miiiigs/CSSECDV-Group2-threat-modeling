@@ -11,10 +11,10 @@ const bcrypt = require("bcrypt");
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Import isAuthenticated middleware
-const { isAuthenticated, newAuthCheck } = require('../middleware/auth');
+const { authCheck } = require('../middleware/auth');
 
-// Apply newAuthCheck to all protected routes
-router.use(newAuthCheck());
+// Apply authCheck to all protected routes
+router.use(authCheck());
 
 // 📸 Update profile
 router.post("/update-profile", upload.single("profilePicture"), async (req, res) => {
@@ -66,7 +66,7 @@ router.post("/update-profile", upload.single("profilePicture"), async (req, res)
 });
 
 // Profile page
-router.get("/profile", newAuthCheck(), async (req, res) => {
+router.get("/profile", authCheck(), async (req, res) => {
   try {
     const userDoc = await User.findById(req.session.user._id).lean();
 

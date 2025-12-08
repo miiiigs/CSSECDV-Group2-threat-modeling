@@ -26,31 +26,36 @@ document.addEventListener("DOMContentLoaded", () => {
 const deleteUser = async (req, res) => {
   try {
     const Error_Log = require("../models/Error_Log");
-    const studentId = req.body.selectedUser;
-    // Strict validation: studentId must be a string of digits, length 6-10
-    if (!studentId || typeof studentId !== "string" || !/^[0-9]{6,10}$/.test(studentId)) {
+    const userId = req.body.selectedUser;
+    // Strict validation: userId must be a string of digits, length 6-10
+    if (!userId || typeof userId !== "string" || !/^[0-9]{6,10}$/.test(userId)) {
       let error = new Error_Log({
         type: "Validation Failure",
         where: "Controller: deleteUser",
-        description: "Invalid studentId input",
-        error: studentId
+        description: "Invalid User ID input",
+        error: userId
       });
       await error.save();
       return res.status(400).send("Invalid input. Please try again.");
     }
-    const studentDat = await User.findOne({'id': studentId}).lean();
-    if (!studentDat) {
+    const userDat = await User.findOne({'id': userId}).lean();
+    if (!userDat) {
       let error = new Error_Log({
         type: "Validation Failure",
         where: "Controller: deleteUser",
-        description: "Student not found for deletion",
-        error: studentId
+        description: "User not found for deletion",
+        error: userId
       });
       await error.save();
       return res.status(404).send("User not found.");
     }
-    await User.deleteOne({'id': studentId});
-    var users = await User.find({'role': 'student'}).lean(); // Get all students (ie non-admin)
+    await User.deleteOne({'id': userId});
+
+    if(req.session.user.role === 'admin')
+      var users = await User.find({'role': { $nin: ["student"] }}).lean();
+    else
+      users = await User.find({'role': { $in: ["student"] }}).lean();
+    
     res.render("partials/admin_delete_user", { 
       usersToDelete: users, 
       delUser: true

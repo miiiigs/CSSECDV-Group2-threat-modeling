@@ -105,48 +105,6 @@ router.get("/view_reservation", requireRole('labtech','student') , async (req, r
 router.post("/api/seats/reserve", requireRole('labtech','student') , async (req, res) => {
 
   let { labNumber, seatNumber, date, startTime, endTime, user, idNum } = req.body;
-  /*
-    if (req.session.user.isLabtech){
-      try {
-        const existing = await Reservation.findOne({
-          labNumber,
-          seatNumber,
-          date,
-          startTime,
-        });
-        if (existing)
-          return res
-            .status(400)
-            .json({ message: "Seat already reserved for that time." });
-
-
-        idNum = parseInt(idNum);
-        const student_user = await User.findById(idNum);
-
-          
-        const reservation = new Reservation({
-          labNumber,
-          seatNumber,
-          date,
-          startTime,
-          endTime,
-          reservedBy: student_user.username,
-        });
-        await reservation.save();
-
-        res.status(200).json({ message: "Seat reserved successfully." });
-      } catch (err) {
-
-        
-
-        console.error("Reservation error:", err);
-        res.status(500).json({ message: "Server error during reservation." });
-      }
-    }
-    */
-
-    //student reservation
-   // else {
       try {
         const existing = await Reservation.findOne({
           labNumber,

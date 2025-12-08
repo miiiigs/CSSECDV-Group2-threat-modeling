@@ -8,7 +8,7 @@ const userController = require('../controllers/delUserController');
 const { newAuthCheck,  requireRole } = require('../middleware/auth');
 
 // 🔎 Search
-router.get('/search', requireRole('admin'), async (req, res) => {
+router.get('/search', requireRole('labtech'), async (req, res) => {
   const { username, fullname, studentid } = req.query;
 
   const query = {'role': 'student'};

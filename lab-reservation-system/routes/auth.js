@@ -152,7 +152,12 @@ router.post("/register", async (req, res) => {
     });
 
     await user.save();
+
+    // Update Redirect back to home of admin
     res.redirect("/login");
+
+
+
   } catch (err) {
     let error = new Error_Log({
       type: "Error",

@@ -14,7 +14,7 @@ const Reservation = require("./models/Reservation");
 const Error_Log = require("./models/Error_Log");
 
 // Import routes
-const { authRoutes, profileRoutes, reservationRoutes, adminRoutes, pageRoutes } = require('./routes');
+const { authRoutes, profileRoutes, reservationRoutes, labtechRoutes, adminRoutes, pageRoutes } = require('./routes');
 
 // Import controllers
 const userController = require('./controllers/delUserController');
@@ -23,7 +23,7 @@ const userController = require('./controllers/delUserController');
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Import auth for middleware
-const { newAuthCheck } = require('./middleware/auth');
+const { authCheck } = require('./middleware/auth');
 
 const app = express();
 const PORT = 3000;
@@ -84,9 +84,10 @@ app.set("view options", { layout: "main" });
 // 🟢 Routes
 app.use("/", pageRoutes);
 app.use("/", authRoutes);
-app.use("/", newAuthCheck(), profileRoutes);
-app.use("/", newAuthCheck(), reservationRoutes);
-app.use("/", newAuthCheck(), adminRoutes);
+app.use("/", authCheck(), profileRoutes);
+app.use("/", authCheck(), reservationRoutes);
+app.use("/", authCheck(), adminRoutes);
+app.use("/", authCheck(), labtechRoutes);
 
 
 // 🚀 Start server

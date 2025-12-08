@@ -1,5 +1,5 @@
 <body>
-  <h2>Delete Student</h2>
+  <h2>Delete User</h2>
 
   <!-- Search Section -->
   <form method="GET" action="/delete-user" id="searchForm">
@@ -30,6 +30,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>User Role</th>
             </tr>
             </thead>
             <tbody id="tBodyId">
@@ -39,6 +40,7 @@
                         <td>{{this.id}}</td>
                         <td>{{this.lastName}}, {{this.firstName}}</td>
                         <td>{{this.email}}</td>
+                        <td>{{this.role}}</td>
                     </tr>
                 {{/each}}    
             </tbody>
@@ -78,6 +80,7 @@
                   <th>ID</th>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>User Role</th>
               </tr>
               </thead>
               <tbody id="tBodyId">
@@ -86,6 +89,7 @@
                         <td>${user.id}</td>
                         <td>${user.lastName}, ${user.firstName}</td>
                         <td>${user.email}</td>
+                        <td>${user.role}</td>
                     </tr>   
               </tbody>
           </table>

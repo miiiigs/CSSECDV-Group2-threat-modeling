@@ -1,40 +1,5 @@
-// Authentication middleware
-function isAuthenticated(role) {
-  return function(req, res, next) {
-    if (!req.session || !req.session.user) {
-      return res.redirect('/login');
-    }
-
-    if (role === 'LabTech') {
-      if (req.session.user.role === 'labtech') {
-        return next();
-      } else {
-        return res.redirect('/logout');
-      }
-    } 
-    else if (role === 'Student') {
-      if (req.session.user.role === 'student') {
-        return next();
-      } else {
-        return res.redirect('/logout');
-      }
-    }
-    else if (role === 'Admin') {
-      if (req.session.user.role === 'admin') {
-        return next();
-      } else {
-        return res.redirect('/logout');
-      }
-    }
-    else {
-      // Invalid role specified
-      return res.redirect('/logout');
-    }
-  };
-}
-
 // Main authentication to check for valid session
-function newAuthCheck() {
+function authCheck() {
   return function(req, res, next) {
     // Checks if there is a session or if the session has the 'user' property/object
     if (!req.session || !req.session.user) {
@@ -71,4 +36,4 @@ function requireRole(role1, role2) {
   };
 }
 
-module.exports = { isAuthenticated, newAuthCheck, requireRole }; 
+module.exports = { authCheck, requireRole }; 
