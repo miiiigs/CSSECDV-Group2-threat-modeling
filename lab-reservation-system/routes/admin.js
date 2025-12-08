@@ -204,3 +204,35 @@ router.get("/edit-user", requireRole('admin'), async (req, res) => {
 //router.post('/edit-post', requireRole('admin'), userController.editUser);
 
 module.exports = router; 
+        // Access control: only admins can view logs
+        if (!req.session.user || req.session.user.role !== 'admin') {
+          let error = new Error_Log({
+            type: "Access Control Failure",
+            where: "Route Admin : Get /log-history",
+            description: `Unauthorized log access attempt by user ${req.session.user?.email || 'unknown'}`,
+            error: req.session.user
+          });
+          await error.save();
+          return res.status(403).send("Access denied. Admins only.");
+        }
+        try {
+          const {category} = req.query;
+          const query = {};
+          if(category != "All")
+            query.type = category;
+          const _logs = await Error_Log.find(query).lean();
+          res.render("partials/admin_log_history", {
+            logs: _logs,
+            query: req.query
+          });
+        } catch (err) {
+          let error = new Error_Log({
+            type: "Error",
+            where: "Route Admin : Get /log-history",
+            description: "Error viewing logs",
+            error: err
+          });
+          await error.save();
+          res.status(500).send("Error viewing logs");
+        }
+      });
