@@ -5,10 +5,10 @@ const Reservation = require("../models/Reservation");
 const Error_Log = require("../models/Error_Log");
 
 // Import auth middleware
-const { newAuthCheck, requireRole } = require('../middleware/auth');
+const { authCheck, requireRole } = require('../middleware/auth');
 
 // Apply authentication to all reservation routes
-router.use(newAuthCheck());
+router.use(authCheck());
 
 // 📅 Create Reservation page
 router.get("/create", requireRole('labtech','student') , async (req, res) => {

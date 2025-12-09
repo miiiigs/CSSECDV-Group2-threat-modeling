@@ -67,7 +67,8 @@ router.get("/log-history", requireRole('admin'), async (req, res) => {
 
   res.render("partials/admin_log_history", {
     logs: _logs,
-    query: req.query
+    query: req.query,
+    chkLog: true
   });
 
   } catch (err) {
@@ -84,7 +85,7 @@ router.get("/log-history", requireRole('admin'), async (req, res) => {
 
 // 📝 Create account Routes
 router.get("/create-user", requireRole('admin'), (req, res) => {
-  res.render("partials/admin_create_acc", { showRoleSelect: true });
+  res.render("partials/admin_create_acc", { showRoleSelect: true, createUser: true });
 });
 
 router.post("/create-post", requireRole('admin'), async (req, res) => {
@@ -183,7 +184,7 @@ router.get("/edit-user", requireRole('admin'), async (req, res) => {
     res.render("partials/admin_edit_user", {
       usersToEdit: user,
       query: req.query,
-      delUser: true
+      editUser: true
     });
 
   } catch (err) {
@@ -203,7 +204,29 @@ router.get("/edit-user", requireRole('admin'), async (req, res) => {
 
 //router.post('/edit-post', requireRole('admin'), userController.editUser);
 
-module.exports = router; 
+/*
+// Admin: View logs
+router.get("/log-history", requireRole('admin'), async (req, res) => {
+  try {
+  
+  const {category} = req.query;
+  const query = {};
+  
+  if(category != "All")
+    query.type = category;
+  _logs = await Error_Log.find(query).lean();
+
+  res.render("partials/admin_log_history", {
+    logs: _logs,
+    query: req.query
+  });
+
+  } catch (err) {
+    // Create error log
+      let error = new Error_Log({
+        type: "Error",
+        where: "Route Admin : Get /log-history",
+        description: "Error viewing logs",
         // Access control: only admins can view logs
         if (!req.session.user || req.session.user.role !== 'admin') {
           let error = new Error_Log({
@@ -236,3 +259,12 @@ module.exports = router;
           res.status(500).send("Error viewing logs");
         }
       });
+
+*/
+
+module.exports = router;
+
+
+
+
+
